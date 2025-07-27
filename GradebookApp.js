@@ -69,19 +69,8 @@ console.log(hasPassingGrade(100));
 console.log(hasPassingGrade(20));
 console.log(hasPassingGrade(56));
 console.log(hasPassingGrade(60));
-
-//function return a string representing a messege to the student
-
-function passed(score) {
-if (!isValidScore(score)) return "Invalid score"
-if(hasPassingGrade(score) )  return "You Passed the exam";
-else return "You failed the exam"
-}
-
-console.log(passed(999));
-console.log(passed(3));
-console.log(passed(""));
-
+ 
+//function to return a message 
 
 function studentMsg(totalScores, studentScore) {
 
@@ -90,7 +79,7 @@ function studentMsg(totalScores, studentScore) {
   const passed = hasPassingGrade(studentScore);
 
   const  baseMessage = `Class average: ${average}. Your grade: ${grade}.`
-  
+
   if (!isValidScore(studentScore)) return "Invalid invalid student score."
   if(hasPassingGrade(studentScore)) return baseMessage + " You passed the course."
   else return baseMessage + " You failed the course."
