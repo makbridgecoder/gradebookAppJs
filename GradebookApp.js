@@ -1,3 +1,18 @@
+const scoreAdd = document.querySelector(".score-add-form");
+const subjectDropdown = document.querySelector("#subject_dropdown"); 
+const classInput = document.querySelector("#class_number_entry");
+const nameInput = document.querySelector("#name");
+const surnameInput = document.querySelector("#surname");
+const assessmentDropdown = document.querySelector("#assessments_dropdown");
+
+
+
+
+
+
+
+
+
 //function to count average score
 
 let scores = [];
@@ -80,7 +95,7 @@ function studentMsg(totalScores, studentScore) {
 
   const  baseMessage = `Class average: ${average}. Your grade: ${grade}.`
 
-  if (!isValidScore(studentScore)) return "Invalid invalid student score."
+  if (!isValidScore(studentScore)) return "Invalid student score."
   if(hasPassingGrade(studentScore)) return baseMessage + " You passed the course."
   else return baseMessage + " You failed the course."
 

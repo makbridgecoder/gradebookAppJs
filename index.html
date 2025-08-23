@@ -3,10 +3,92 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS in VS Code</title>
+    <link href="gradebook.css" rel="stylesheet"></style>
   </head>
   <body>
-    <h1>Hello, JS</h1>
-    <script src="script.js"></script>
+    <div class="row">
+      <h1 >Gradebook</h1>
+      <div class="welcome_cnt">
+        <h2>Enter data</h2>
+      </div>
+      <div class="bgr-color-switch-container">
+        <button class="bgr_switch_btn">
+          Switch background
+        </button>
+      </div>
+      <div class="gradebook_frame">
+        <form class="score-add-form">
+          <fieldset>
+            <legend>General data</legend>
+            <div class="data_form">
+              <label>Class</label>
+              <select id="class_number_entry" name="options">
+                <option value="1a" selected>1a</option>
+                <option value="1b" selected>1a</option>
+                <option value="1c" selected>1a</option>
+                <option value="2a" selected>2a</option>
+                <option value="2b" selected>2b</option>
+                <option value="2c" selected>2c</option>
+                <option value="3a" selected>3a</option>
+                <option value="3b" selected>3b</option>
+                <option value="3c" selected>3c</option>
+              </select>
+            </div>
+            <div class="data_form">
+              <label>Subject</label>
+              <!--set up a dynamically sort with JS -->
+              <select id="subject_dropdown">
+                <option value="mathematic" >Mathematic</option>
+                <option value="chemisty" >Chemistry</option>
+                <option value="biology" >Biology</option>
+                <option value="physics" >Physics</option>
+                <option value="english" selected>English</option>
+                <option value="history" >History</option>
+                <option value="spanish" >Spanish</option>
+                <option value="physical-education" >Physical-education</option>
+                <option value="geography" >Geography</option>
+              </select>
+            </div>
+          </fieldset>
+          <fieldset><!--get student data from DB or check if it is in the DB-->
+            <legend>Student data</legend>
+            <div class="data_form">
+              <label>Name</label>
+              <input type="text" id="name" ></input>
+            </div>
+            <div class="data_form">
+              <label>Surname</label>
+              <input type="text" id="surname" ></input>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Student score</legend>
+            <div class="data_form">
+              <label>Type of assessments and activities</label>
+              <select id="assessments_dropdown">
+                <option value="testquizzes" selected>Test & Quizzes</option>
+                <option value="homework">Homework</option>
+                <option value="class_participation">Class Participation</option>
+                <option value="project&presentation">Project & Presentation</option>
+                <option value="essays_&_Written Work">Essays & Written Work</option>
+                <option value="Labs & Practical Work">Labs & Practical Work</option>
+                <option value="Final Exams / Midterms">Final Exams / Midterms</option>
+              </select>
+            </div>
+            <div class="data_form">
+              <label>Score</label>
+              <input type="text" id="name"></input>
+            </div>
+            <div>
+              <button type="submit">Add score</button>
+            </div>
+        
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    
     <script src="GradebookApp.js"></script>
   </body>
 </html>

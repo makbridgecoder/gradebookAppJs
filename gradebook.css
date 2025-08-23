@@ -1,0 +1,19 @@
+.row {
+  display: inline-block;
+}
+
+.gradebook_frame {
+  outline: 2px solid red;
+}
+
+.gradebook_frame div {
+  margin-top: 0.3rem;
+}
+
+.score-add-form {
+  outline: 1px solid green;
+}
+
+.welcome_cnt button {
+  display: flex;
+}
