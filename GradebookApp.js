@@ -46,6 +46,8 @@ function getGrade(score) {
     return "F";
 };
 
+console.log(getGrade());
+
 //function to check if student has a passing check
 
 function hasPassingGrade(score) {
@@ -71,10 +73,10 @@ function studentMsg(totalScores, studentScore) {
   
 }
 
+console.log(studentMsg());
 
 function getRandomIndex() {
   let randomNumber = Math.floor((backgroundColorsArr.length * Math.random()));
-  console.log(randomNumber);
   return randomNumber;
 } 
 
@@ -85,3 +87,8 @@ function switchBtnAction() {
 
 switchBtn.addEventListener("click", switchBtnAction);
 
+// grade valid check function
+
+function gradeIsCorrect() {
+  if 
+}
