@@ -7,12 +7,12 @@ const surnameInput = document.querySelector("#surname");
 const assessmentDropdown = document.querySelector("#assessments_dropdown");
 const switchBtn = document.getElementById('bgr_switch_btn');
 
-
-
-
-
-
-
+const backgroundColorsArr = [
+  "#D6A99D",
+  "#FBF3D5",
+  "#8AA624", 
+  "#DEE8CE"
+];
 
 //function to count average score
 
@@ -28,28 +28,11 @@ function getAverageScore(scores) {
   
 }
 
-console.log(getAverageScore([92, 88, 12, 77, 57, 100, 67, 38, 97, 89]));
-console.log(getAverageScore([45, 87, 98, 100, 86, 94, 67, 88, 94, 95]));
-console.log(getAverageScore([2,3,45,6,2,2]));
-
 //function to check validation of score
 
 function isValidScore(score) {
   return typeof score === "number" && score >= 0 && score <= 100;
 }
-
-console.log(isValidScore(2));
-console.log(isValidScore(25));
-console.log(isValidScore(60));
-console.log(isValidScore(99));
-console.log(isValidScore(101));
-console.log(isValidScore(""));
-console.log(isValidScore(undefined));
-console.log(isValidScore(NaN));
-console.log(isValidScore(200));
-console.log("\n");
-
-
 
 //function to convert score to letter grade
 
@@ -63,15 +46,6 @@ function getGrade(score) {
     return "F";
 };
 
-
-console.log(getGrade(100));
-console.log(getGrade(200));
-console.log(getGrade(97));
-console.log(getGrade(86));
-console.log(getGrade(35));
-console.log(getGrade(""));
-
-
 //function to check if student has a passing check
 
 function hasPassingGrade(score) {
@@ -80,12 +54,6 @@ function hasPassingGrade(score) {
   else return false;
 }
 
-console.log(hasPassingGrade(999));
-console.log(hasPassingGrade(100));
-console.log(hasPassingGrade(20));
-console.log(hasPassingGrade(56));
-console.log(hasPassingGrade(60));
- 
 //function to return a message 
 
 function studentMsg(totalScores, studentScore) {
@@ -103,29 +71,15 @@ function studentMsg(totalScores, studentScore) {
   
 }
 
-console.log(studentMsg([92, 88, 12, 77, 57, 100, 67, 38, 97, 89], 37));
-console.log(studentMsg([92, 88, 12, 77, 57, 100, 67, 38, 97, 89], 60));
-console.log(studentMsg([92, 88, 12, 77, 57, 100, 67, 38, 97, 89], 100));
-console.log(studentMsg([92, 88, 12, 77, 57, 100, 67, 38, 97, 89], 999));
 
-const backgroundColorsArr = [
-  "#D6A99D",
-  "#FBF3D5",
-  "#8AA624", 
-  "#DEE8CE"
-];
-
- 
 function getRandomIndex() {
   let randomNumber = Math.floor((backgroundColorsArr.length * Math.random()));
   console.log(randomNumber);
   return randomNumber;
 } 
 
-
 function switchBtnAction() {
   const color = backgroundColorsArr[getRandomIndex()];
-  console.log(color);
   body.style.backgroundColor = color;
 }
 
