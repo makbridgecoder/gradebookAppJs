@@ -1,5 +1,23 @@
+
+
 .row {
   display: inline-block;
+}
+
+.welcome_cnt  {
+  display: flex;
+  flex-flow:  row nowrap;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.bgr_color_switch_cnt {
+  display: inline-block;
+}
+
+#bgr_switch_btn {
+  background-color: #b6e965;
 }
 
 .gradebook_frame {
@@ -12,8 +30,4 @@
 
 .score-add-form {
   outline: 1px solid green;
-}
-
-.welcome_cnt button {
-  display: flex;
 }
