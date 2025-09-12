@@ -45,10 +45,17 @@ function getAverageScore(scores) {
 }
 
 
-//Name & Surname validation 
+//Name validation 
 const nameRegex = /^[A-Z][a-z]{2,15}$/;
   
 
+function validationCheck() {
+  
+
+
+};
+
+//name validation
 function validateName(e) {
   e.preventDefault();
   const nameValue = nameInput.value;
@@ -58,12 +65,13 @@ function validateName(e) {
   if (nameValue === "" ) {
     nameInputAlert.style.display = "inline";
     nameInputAlert.textContent = "This field cannot be empty";  
+    nameInput.style.borderColor = "red";
     console.log("empty");
   } else if (!nameRegex.test(nameValue)) {
     nameInput.style.borderColor = "red";
     nameInputAlert.style.display = "inline";
     nameInputAlert.textContent = "Name must start with a capital letter and be 3-15 characters long";
-    console.log("invalid");
+    console.log("invalid name");
     isValid = false;
   } else {
     nameInputAlert.style.display = "none";
@@ -72,12 +80,36 @@ function validateName(e) {
     return isValid;
   }
   
-}
+};
+
+//surname validation
+function validateSurname(e) {
+  e.preventDefault();
+  const surnameValue = surnameInput.value;
+  let isValid = true;
+  
+  if (surnameValue === '') {
+    surnameInputAlert.style.display = "inline";
+    surnameInputAlert.textContent = "This field cannot be empty";
+    surnameInput.style.borderColor = "red";
+  } else if (!nameRegex.test(surnameValue)) {
+    surnameInput.style.borderColor = "red";
+    surnameInputAlert.style.display = "inline";
+    surnameInputAlert.textContent = "Name must start with a capital letter and be 3-15 characters long";
+    console.log("invalid surname");
+    isValid = false;
+  } else {
+    surnameInputAlert.style.display = "none";
+    surnameInput.style.borderColor = "green";
+    console.log("valid surname");
+    
+  }
+};
 
 
 
 scoreAdd.addEventListener("submit", validateName);
-
+scoreAdd.addEventListener("submit", validateSurname);
 
 //function to check validation of score
 
