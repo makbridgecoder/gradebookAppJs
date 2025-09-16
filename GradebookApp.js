@@ -9,6 +9,8 @@ const switchBtn = document.getElementById("bgr_switch_btn");
 const nameInputAlert = document.getElementById("name-input-alert");
 const surnameInputAlert = document.getElementById("surname-input-alert");
 
+
+
 const backgroundColorsArr = [
   "#D6A99D",
   "#FBF3D5",
@@ -46,70 +48,37 @@ function getAverageScore(scores) {
 
 
 //Name validation 
-const nameRegex = /^[A-Z][a-z]{2,15}$/;
+const nameRegex = /^[A-Z][a-z]{2,14}$/;
   
 
-function validationCheck() {
-  
+//function to check name and surname validation
 
 
-};
-
-//name validation
-function validateName(e) {
+function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
   e.preventDefault();
-  const nameValue = nameInput.value;
-  const surnameValue = surnameInput.value;
-  let isValid = true;
 
-  if (nameValue === "" ) {
-    nameInputAlert.style.display = "inline";
-    nameInputAlert.textContent = "This field cannot be empty";  
-    nameInput.style.borderColor = "red";
-    console.log("empty");
-  } else if (!nameRegex.test(nameValue)) {
-    nameInput.style.borderColor = "red";
-    nameInputAlert.style.display = "inline";
-    nameInputAlert.textContent = "Name must start with a capital letter and be 3-15 characters long";
-    console.log("invalid name");
-    isValid = false;
+  if (input.value === '') {
+    nameAndSurnameInputAlert.style.display = "inline";
+    nameAndSurnameInputAlert.textContent = "This field cannot be empty";
+    input.style.borderColor = "red";
+
+  } else if (!nameRegex.test(input.value)) {
+    nameAndSurnameInputAlert.style.display = "inline";
+    nameAndSurnameInputAlert.textContent = "Input must start with a capital letter and be 3-15 characters long";
+    console.log("Invalid input");
+
   } else {
-    nameInputAlert.style.display = "none";
-    nameInput.style.borderColor = "green";
-    console.log("valid");
-    return isValid;
+    input.style.borderColor = "green";
+    nameAndSurnameInputAlert.style.display = "none";
+    console.log("Valid input");
   }
-  
-};
 
-//surname validation
-function validateSurname(e) {
-  e.preventDefault();
-  const surnameValue = surnameInput.value;
-  let isValid = true;
-  
-  if (surnameValue === '') {
-    surnameInputAlert.style.display = "inline";
-    surnameInputAlert.textContent = "This field cannot be empty";
-    surnameInput.style.borderColor = "red";
-  } else if (!nameRegex.test(surnameValue)) {
-    surnameInput.style.borderColor = "red";
-    surnameInputAlert.style.display = "inline";
-    surnameInputAlert.textContent = "Name must start with a capital letter and be 3-15 characters long";
-    console.log("invalid surname");
-    isValid = false;
-  } else {
-    surnameInputAlert.style.display = "none";
-    surnameInput.style.borderColor = "green";
-    console.log("valid surname");
-    
-  }
-};
+}; 
 
-
-
-scoreAdd.addEventListener("submit", validateName);
-scoreAdd.addEventListener("submit", validateSurname);
+scoreAdd.addEventListener("submit", (e) => {
+  nameAndsurnameValidation(e, nameInput, nameInputAlert); 
+  nameAndsurnameValidation(e, surnameInput, surnameInputAlert); 
+});
 
 //function to check validation of score
 
