@@ -1,11 +1,15 @@
-const body = document.querySelector('body');
+const body = document.querySelector("body");
 const scoreAdd = document.querySelector(".score-add-form");
 const subjectDropdown = document.querySelector("#subject_dropdown"); 
 const classInput = document.querySelector("#class_number_entry");
-const nameInput = document.querySelector("#name");
-const surnameInput = document.querySelector("#surname");
+const nameInput = document.querySelector("#name-input");
+const surnameInput = document.querySelector("#surname-input");
 const assessmentDropdown = document.querySelector("#assessments_dropdown");
-const switchBtn = document.getElementById('bgr_switch_btn');
+const switchBtn = document.getElementById("bgr_switch_btn");
+const nameInputAlert = document.getElementById("name-input-alert");
+const surnameInputAlert = document.getElementById("surname-input-alert");
+
+
 
 const backgroundColorsArr = [
   "#D6A99D",
@@ -13,6 +17,20 @@ const backgroundColorsArr = [
   "#8AA624", 
   "#DEE8CE"
 ];
+
+//Changes page background color
+
+function getRandomIndex() {
+  let randomNumber = Math.floor((backgroundColorsArr.length * Math.random()));
+  return randomNumber;
+} 
+
+function switchBtnAction() {
+  const color = backgroundColorsArr[getRandomIndex()];
+  body.style.backgroundColor = color;
+}
+
+switchBtn.addEventListener("click", switchBtnAction);
 
 //function to count average score
 
@@ -28,6 +46,40 @@ function getAverageScore(scores) {
   
 }
 
+
+//Name validation 
+const nameRegex = /^[A-Z][a-z]{2,14}$/;
+  
+
+//function to check name and surname validation
+
+
+function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
+  e.preventDefault();
+
+  if (input.value === '') {
+    nameAndSurnameInputAlert.style.display = "inline";
+    nameAndSurnameInputAlert.textContent = "This field cannot be empty";
+    input.style.borderColor = "red";
+
+  } else if (!nameRegex.test(input.value)) {
+    nameAndSurnameInputAlert.style.display = "inline";
+    nameAndSurnameInputAlert.textContent = "Input must start with a capital letter and be 3-15 characters long";
+    console.log("Invalid input");
+
+  } else {
+    input.style.borderColor = "green";
+    nameAndSurnameInputAlert.style.display = "none";
+    console.log("Valid input");
+  }
+
+}; 
+
+scoreAdd.addEventListener("submit", (e) => {
+  nameAndsurnameValidation(e, nameInput, nameInputAlert); 
+  nameAndsurnameValidation(e, surnameInput, surnameInputAlert); 
+});
+
 //function to check validation of score
 
 function isValidScore(score) {
@@ -35,6 +87,7 @@ function isValidScore(score) {
 }
 
 //function to convert score to letter grade
+
 
 function getGrade(score) {
   if (!isValidScore(score)) return "Invalid number";
@@ -75,20 +128,3 @@ function studentMsg(totalScores, studentScore) {
 
 console.log(studentMsg());
 
-function getRandomIndex() {
-  let randomNumber = Math.floor((backgroundColorsArr.length * Math.random()));
-  return randomNumber;
-} 
-
-function switchBtnAction() {
-  const color = backgroundColorsArr[getRandomIndex()];
-  body.style.backgroundColor = color;
-}
-
-switchBtn.addEventListener("click", switchBtnAction);
-
-// grade valid check function
-
-function gradeIsCorrect() {
-  if 
-}

@@ -31,3 +31,10 @@
 .score-add-form {
   outline: 1px solid green;
 }
+
+#name-input-alert, 
+#surname-input-alert {
+  color: red;
+  display: none;
+  
+}
