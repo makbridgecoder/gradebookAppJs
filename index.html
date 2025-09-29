@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JS in VS Code</title>
+    <title>Gradebook</title>
     <link href="gradebook.css" rel="stylesheet"></style>
   </head>
   <body>
@@ -54,11 +54,11 @@
             <legend>Student data</legend>
             <div class="data_form">
               <label>Name</label>
-              <input type="text" id="name-input" ></input><div id="name-input-alert"></div>
+              <input type="text" id="name-input" ><div id="name-input-alert"></div>
             </div>
             <div class="data_form">
               <label>Surname</label>
-              <input type="text" id="surname-input"></input><div id="surname-input-alert"></div>
+              <input type="text" id="surname-input"><div id="surname-input-alert"></div>
             </div>
           </fieldset>
           <fieldset>
@@ -77,10 +77,10 @@
             </div>
             <div class="data_form">
               <label>Score</label>
-              <input type="text" ></input>
+              <input type="text" id="score-input" ><span class="hide" id="score-comment"></span>
             </div>
             <div>
-              <button type="submit">Add score</button>
+              <button type="submit" id="add-score-btn">Add score</button>
             </div>
           </fieldset>
         </form>

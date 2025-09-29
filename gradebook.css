@@ -33,8 +33,14 @@
 }
 
 #name-input-alert, 
-#surname-input-alert {
+#surname-input-alert, 
+#score-comment {
   color: red;
   display: none;
+  
+}
+
+.hide {
+  
   
 }
