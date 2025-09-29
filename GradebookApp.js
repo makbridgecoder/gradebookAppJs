@@ -8,6 +8,9 @@ const assessmentDropdown = document.querySelector("#assessments_dropdown");
 const switchBtn = document.getElementById("bgr_switch_btn");
 const nameInputAlert = document.getElementById("name-input-alert");
 const surnameInputAlert = document.getElementById("surname-input-alert");
+const addScoreBtn = document.getElementById("add-score-btn");
+const scoreInput = document.getElementById("score-input");
+const scoreComment = document.getElementById("score-comment"); 
 
 
 
@@ -46,13 +49,10 @@ function getAverageScore(scores) {
   
 }
 
-
 //Name validation 
-const nameRegex = /^[A-Z][a-z]{2,14}$/;
-  
-
+const nameRegex = /^[A-Z][a-z]{1,14}$/;
+ 
 //function to check name and surname validation
-
 
 function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
   e.preventDefault();
@@ -61,16 +61,15 @@ function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
     nameAndSurnameInputAlert.style.display = "inline";
     nameAndSurnameInputAlert.textContent = "This field cannot be empty";
     input.style.borderColor = "red";
-
+    
   } else if (!nameRegex.test(input.value)) {
     nameAndSurnameInputAlert.style.display = "inline";
-    nameAndSurnameInputAlert.textContent = "Input must start with a capital letter and be 3-15 characters long";
-    console.log("Invalid input");
+    nameAndSurnameInputAlert.textContent = "Input must start with a capital letter and be 2-15 characters long";
+    input.style.borderColor = "red";
 
   } else {
     input.style.borderColor = "green";
     nameAndSurnameInputAlert.style.display = "none";
-    console.log("Valid input");
   }
 
 }; 
@@ -78,17 +77,54 @@ function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
 scoreAdd.addEventListener("submit", (e) => {
   nameAndsurnameValidation(e, nameInput, nameInputAlert); 
   nameAndsurnameValidation(e, surnameInput, surnameInputAlert); 
+  //place for next function
 });
-
+//! finish this function / validation
 //function to check validation of score
 
 function isValidScore(score) {
-  return typeof score === "number" && score >= 0 && score <= 100;
-}
+
+  if (score === "") {
+    console.log("empty score");
+    scoreComment.innerHTML = "This field cannot be empty";
+    scoreComment.style.display = "inline"
+    scoreInput.style.borderColor = "red";
+    return false;
+  } 
+  
+  score = Number(score);
+
+  if (isNaN(score)) {
+    scoreComment.innerHTML = "Score must be a number";
+    scoreComment.style.display = "inline";
+    scoreInput.style.borderColor = "red";
+    console.log("Must be a number")
+    return false;
+  } 
+  
+  if (score >= 0 && score <= 100) {
+    console.log("Valid score");
+    scoreComment.style.display = "none";
+    scoreInput.style.borderColor = "green";
+    return true;
+    
+  } else {
+    scoreComment.innerHTML = "Score must be between 0 and 100";
+    scoreComment.style.display = "inline";
+    scoreInput.style.borderColor = "red";
+    console.log("Invalid score");
+    return false;
+  }
+};
+
+addScoreBtn.addEventListener('click', () => { 
+  const scoreValue = scoreInput.value;
+  isValidScore(scoreValue);
+  console.log("click is ok")
+});
 
 //function to convert score to letter grade
-
-
+/*
 function getGrade(score) {
   if (!isValidScore(score)) return "Invalid number";
     if (score == 100) return "A++";
@@ -97,9 +133,8 @@ function getGrade(score) {
     if (score >=70) return "C";
     if (score >=60) return "D";
     return "F";
+    
 };
-
-console.log(getGrade());
 
 //function to check if student has a passing check
 
@@ -108,6 +143,11 @@ function hasPassingGrade(score) {
   if (getGrade(score) !== "F") return true;
   else return false;
 }
+
+
+
+
+addScoreBtn.addEventListener("click", hasPassingGrade)
 
 //function to return a message 
 
@@ -128,3 +168,4 @@ function studentMsg(totalScores, studentScore) {
 
 console.log(studentMsg());
 
+*/
