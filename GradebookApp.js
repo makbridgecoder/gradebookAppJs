@@ -11,8 +11,8 @@ const surnameInputAlert = document.getElementById("surname-input-alert");
 const addScoreBtn = document.getElementById("add-score-btn");
 const scoreInput = document.getElementById("score-input");
 const scoreComment = document.getElementById("score-comment"); 
-
-
+const entriesContainer = document.querySelector(".entries_cnt");
+let scoreIsValid = false;
 
 const backgroundColorsArr = [
   "#D6A99D",
@@ -51,41 +51,34 @@ function getAverageScore(scores) {
 
 //Name validation 
 const nameRegex = /^[A-Z][a-z]{1,14}$/;
- 
 //function to check name and surname validation
-
 function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
-  e.preventDefault();
-
   if (input.value === '') {
     nameAndSurnameInputAlert.style.display = "inline";
     nameAndSurnameInputAlert.textContent = "This field cannot be empty";
     input.style.borderColor = "red";
+    return false;
     
   } else if (!nameRegex.test(input.value)) {
     nameAndSurnameInputAlert.style.display = "inline";
     nameAndSurnameInputAlert.textContent = "Input must start with a capital letter and be 2-15 characters long";
     input.style.borderColor = "red";
+    return false;
 
   } else {
     input.style.borderColor = "green";
     nameAndSurnameInputAlert.style.display = "none";
+    return true;
   }
-
+  
 }; 
 
-scoreAdd.addEventListener("submit", (e) => {
-  nameAndsurnameValidation(e, nameInput, nameInputAlert); 
-  nameAndsurnameValidation(e, surnameInput, surnameInputAlert); 
-  //place for next function
-});
-//! finish this function / validation
+
 //function to check validation of score
 
 function isValidScore(score) {
-
+  
   if (score === "") {
-    console.log("empty score");
     scoreComment.innerHTML = "This field cannot be empty";
     scoreComment.style.display = "inline"
     scoreInput.style.borderColor = "red";
@@ -93,20 +86,22 @@ function isValidScore(score) {
   } 
   
   score = Number(score);
-
+  
   if (isNaN(score)) {
     scoreComment.innerHTML = "Score must be a number";
     scoreComment.style.display = "inline";
     scoreInput.style.borderColor = "red";
     console.log("Must be a number")
     return false;
+    
   } 
   
   if (score >= 0 && score <= 100) {
-    console.log("Valid score");
     scoreComment.style.display = "none";
     scoreInput.style.borderColor = "green";
-    return true;
+    scoreIsValid = true;
+    return true ;
+    
     
   } else {
     scoreComment.innerHTML = "Score must be between 0 and 100";
@@ -116,17 +111,46 @@ function isValidScore(score) {
     return false;
   }
 };
+/* TO DO
+- why function add a new entry if when one student data inpus is empty?(for.. of?)
+- add enties counter 
+*/
 
-addScoreBtn.addEventListener('click', () => { 
+let entryCount = 0;
+function addScoreEntry() {
+  const scoreInputToNumber = Number(scoreInput.value);
+  const grade = getGrade(scoreInputToNumber);
+  entryCount++;
+  const HTMLString = `
+  <p>${entryCount} ${nameInput.value} ${surnameInput.value} &nbsp; &nbsp ${classInput.value}</p> 
+  <p>Subject: ${subjectDropdown.value} Type of assesments: ${assessmentDropdown.value}</p>
+  
+  Score: ${scoreInputToNumber} &nbsp; &nbsp Grade: ${grade}
+  
+  `
+  
+  entriesContainer.insertAdjacentHTML('beforeend', HTMLString);
+  
+  
+}
+
+addScoreBtn.addEventListener('click', (e) => { 
+  e.preventDefault();
   const scoreValue = scoreInput.value;
-  isValidScore(scoreValue);
-  console.log("click is ok")
-});
-
+  const isScoreValid = isValidScore(scoreValue);
+  const isNameValid = nameAndsurnameValidation(e, nameInput, nameInputAlert); 
+  const isSurnameValid = nameAndsurnameValidation(e, surnameInput, surnameInputAlert); 
+  if (!isNameValid || !isSurnameValid || !isScoreValid) {
+      console.log("validation failed");
+      return;
+    } 
+    addScoreEntry();
+  }
+);
+  
 //function to convert score to letter grade
-/*
 function getGrade(score) {
-  if (!isValidScore(score)) return "Invalid number";
+
     if (score == 100) return "A++";
     if (score >=90) return "A";
     if (score >=80) return "B";
@@ -135,6 +159,9 @@ function getGrade(score) {
     return "F";
     
 };
+
+
+/*
 
 //function to check if student has a passing check
 

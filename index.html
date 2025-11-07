@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -21,7 +22,7 @@
           <fieldset>
             <legend>General data</legend>
             <div class="data_form">
-              <label>Class</label>
+              <label for="class_number_entry">Class</label>
               <select id="class_number_entry" name="options">
                 <option value="1a" selected>1a</option>
                 <option value="1b" selected>1a</option>
@@ -35,7 +36,7 @@
               </select>
             </div>
             <div class="data_form">
-              <label>Subject</label>
+              <label for="subject_dropdown">Subject</label>
               <!--set up a dynamically sort with JS -->
               <select id="subject_dropdown">
                 <option value="mathematic" >Mathematic</option>
@@ -53,18 +54,18 @@
           <fieldset><!--get student data from DB or check if it is in the DB-->
             <legend>Student data</legend>
             <div class="data_form">
-              <label>Name</label>
+              <label for="name-input">Name</label>
               <input type="text" id="name-input" ><div id="name-input-alert"></div>
             </div>
             <div class="data_form">
-              <label>Surname</label>
+              <label for="surname-input">Surname</label>
               <input type="text" id="surname-input"><div id="surname-input-alert"></div>
             </div>
           </fieldset>
           <fieldset>
             <legend>Student score</legend>
             <div class="data_form">
-              <label>Type of assessments and activities</label>
+              <label for="assessments_dropdown">Type of assessments and activities</label>
               <select id="assessments_dropdown">
                 <option value="testquizzes" selected>Test & Quizzes</option>
                 <option value="homework">Homework</option>
@@ -76,8 +77,8 @@
               </select>
             </div>
             <div class="data_form">
-              <label>Score</label>
-              <input type="text" id="score-input" ><span class="hide" id="score-comment"></span>
+              <label for="score-input">Score</label>
+              <input type="number" id="score-input" ><span class="hide" id="score-comment"></span>
             </div>
             <div>
               <button type="submit" id="add-score-btn">Add score</button>
@@ -85,9 +86,10 @@
           </fieldset>
         </form>
       </div>
+      <div class="entries_cnt">
+        
+      </div>
     </div>
-
-    
     <script src="GradebookApp.js"></script>
   </body>
 </html>

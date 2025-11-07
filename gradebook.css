@@ -21,7 +21,6 @@
 }
 
 .gradebook_frame {
-  outline: 2px solid red;
 }
 
 .gradebook_frame div {
@@ -29,7 +28,7 @@
 }
 
 .score-add-form {
-  outline: 1px solid green;
+  outline: 2px solid salmon;
 }
 
 #name-input-alert, 
@@ -40,7 +39,6 @@
   
 }
 
-.hide {
-  
-  
+.entries_cnt {
+  border: 1px solid green;
 }
