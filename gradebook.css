@@ -1,4 +1,7 @@
 
+p {
+  margin: 3px 0;
+}
 
 .row {
   display: inline-block;

@@ -4,7 +4,7 @@ const subjectDropdown = document.querySelector("#subject_dropdown");
 const classInput = document.querySelector("#class_number_entry");
 const nameInput = document.querySelector("#name-input");
 const surnameInput = document.querySelector("#surname-input");
-const assessmentDropdown = document.querySelector("#assessments_dropdown");
+const assessmentDropdown = document.getElementById("assessments_dropdown");
 const switchBtn = document.getElementById("bgr_switch_btn");
 const nameInputAlert = document.getElementById("name-input-alert");
 const surnameInputAlert = document.getElementById("surname-input-alert");
@@ -64,7 +64,7 @@ function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
     nameAndSurnameInputAlert.textContent = "Input must start with a capital letter and be 2-15 characters long";
     input.style.borderColor = "red";
     return false;
-
+    
   } else {
     input.style.borderColor = "green";
     nameAndSurnameInputAlert.style.display = "none";
@@ -115,23 +115,24 @@ function isValidScore(score) {
 - why function add a new entry if when one student data inpus is empty?(for.. of?)
 - add enties counter 
 */
-
 let entryCount = 0;
 function addScoreEntry() {
+  const selectOptionText = assessmentDropdown.options[assessmentDropdown.selectedIndex].text;
+  const selectClassText = classInput.options[classInput.selectedIndex].text;
+  const selectSubjectText = subjectDropdown.options[subjectDropdown.selectedIndex].text;
   const scoreInputToNumber = Number(scoreInput.value);
   const grade = getGrade(scoreInputToNumber);
   entryCount++;
   const HTMLString = `
-  <p>${entryCount} ${nameInput.value} ${surnameInput.value} &nbsp; &nbsp ${classInput.value}</p> 
-  <p>Subject: ${subjectDropdown.value} Type of assesments: ${assessmentDropdown.value}</p>
+  <p>${entryCount} ${nameInput.value} ${surnameInput.value} &nbsp; &nbsp ${selectClassText}</p> 
+  <p>Subject: ${selectSubjectText}</p>
+  <p>Type of assesments: ${selectOptionText}</p>
   
   Score: ${scoreInputToNumber} &nbsp; &nbsp Grade: ${grade}
   
   `
   
   entriesContainer.insertAdjacentHTML('beforeend', HTMLString);
-  
-  
 }
 
 addScoreBtn.addEventListener('click', (e) => { 
