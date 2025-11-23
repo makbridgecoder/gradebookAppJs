@@ -1,6 +1,67 @@
 
+* {
+}
+
+:root {
+--color-gray-50: color(display-p3 .977213 .98084 .985102);
+--color-gray-100: color(display-p3 .953567 .956796 .964321);
+--color-gray-200: color(display-p3 .899787 .906171 .92106);
+--color-gray-300: color(display-p3 .822033 .835264 .858521);
+--color-gray-400: color(display-p3 .605734 .630385 .680158);
+--color-gray-500: color(display-p3 .421287 .446085 .504784);
+--color-gray-600: color(display-p3 .297358 .332176 .39043);
+--color-gray-700: color(display-p3 .219968 .253721 .318679);
+--color-gray-800: color(display-p3 .125854 .159497 .216835);
+--color-gray-900: color(display-p3 .070423 .0928982 .151928);
+--color-blue-700: lab(36.9089% 35.0961 -85.6872);
+}
+
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+
 p {
   margin: 3px 0;
+}
+
+h4 {
+  margin: 3px 0;
+}
+
+legend {
+  font-family: "Share Tech", sans-serif; 
+  font-weight: 300;
+  font-size: 13px;
+  font-style: italic;
+  
+}
+
+label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+  color: var(--color-gray-700)
+
+}
+
+input, 
+select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border-width: 1px;
+  min-width: 100px;
+  border-color: var(--color-gray-400);
+
+}
+
+select:hover {
+  border: 1px solid var(--color-blue-700) ;
+}
+
+fieldset {
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
 
 .row {
@@ -23,15 +84,17 @@ p {
   background-color: #b6e965;
 }
 
-.gradebook_frame {
-}
 
 .gradebook_frame div {
   margin-top: 0.3rem;
 }
 
 .score-add-form {
-  outline: 2px solid salmon;
+  padding: 1rem;
+  border: 1px solid;
+  border-color: var(--color-gray-200);
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px green;
 }
 
 #name-input-alert, 

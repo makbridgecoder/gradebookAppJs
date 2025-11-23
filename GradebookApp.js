@@ -112,8 +112,9 @@ function isValidScore(score) {
   }
 };
 /* TO DO
-- why function add a new entry if when one student data inpus is empty?(for.. of?)
-- add enties counter 
+- add function that create a random id to each record to check if there is no doubled, exacly the same record, make an alert of that
+- change location of the input labels(above the input fields)
+- alert or push up before message sending to accept the record
 */
 let entryCount = 0;
 function addScoreEntry() {
@@ -124,7 +125,7 @@ function addScoreEntry() {
   const grade = getGrade(scoreInputToNumber);
   entryCount++;
   const HTMLString = `
-  <p>${entryCount} ${nameInput.value} ${surnameInput.value} &nbsp; &nbsp ${selectClassText}</p> 
+  <h4>${entryCount}. ${nameInput.value} ${surnameInput.value}</h4> <p>Class: ${selectClassText}</p> 
   <p>Subject: ${selectSubjectText}</p>
   <p>Type of assesments: ${selectOptionText}</p>
   
