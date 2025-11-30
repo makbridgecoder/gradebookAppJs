@@ -54,13 +54,13 @@ const nameRegex = /^[A-Z][a-z]{1,14}$/;
 //function to check name and surname validation
 function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
   if (input.value === '') {
-    nameAndSurnameInputAlert.style.display = "inline";
+    nameAndSurnameInputAlert.style.display = "block";
     nameAndSurnameInputAlert.textContent = "This field cannot be empty";
     input.style.borderColor = "red";
     return false;
     
   } else if (!nameRegex.test(input.value)) {
-    nameAndSurnameInputAlert.style.display = "inline";
+    nameAndSurnameInputAlert.style.display = "block";
     nameAndSurnameInputAlert.textContent = "Input must start with a capital letter and be 2-15 characters long";
     input.style.borderColor = "red";
     return false;
@@ -80,7 +80,7 @@ function isValidScore(score) {
   
   if (score === "") {
     scoreComment.innerHTML = "This field cannot be empty";
-    scoreComment.style.display = "inline"
+    scoreComment.style.display = "block"
     scoreInput.style.borderColor = "red";
     return false;
   } 
@@ -89,7 +89,7 @@ function isValidScore(score) {
   
   if (isNaN(score)) {
     scoreComment.innerHTML = "Score must be a number";
-    scoreComment.style.display = "inline";
+    scoreComment.style.display = "block";
     scoreInput.style.borderColor = "red";
     console.log("Must be a number")
     return false;
@@ -105,7 +105,7 @@ function isValidScore(score) {
     
   } else {
     scoreComment.innerHTML = "Score must be between 0 and 100";
-    scoreComment.style.display = "inline";
+    scoreComment.style.display = "block";
     scoreInput.style.borderColor = "red";
     console.log("Invalid score");
     return false;
@@ -115,6 +115,9 @@ function isValidScore(score) {
 - add function that create a random id to each record to check if there is no doubled, exacly the same record, make an alert of that
 - change location of the input labels(above the input fields)
 - alert or push up before message sending to accept the record
+- how to indicate that input's have a valid value? maybe some ok?
+
+
 */
 let entryCount = 0;
 function addScoreEntry() {
@@ -129,7 +132,7 @@ function addScoreEntry() {
   <p>Subject: ${selectSubjectText}</p>
   <p>Type of assesments: ${selectOptionText}</p>
   
-  Score: ${scoreInputToNumber} &nbsp; &nbsp Grade: ${grade}
+ <span> Score: ${scoreInputToNumber} &nbsp; &nbsp Grade: ${grade}</span>
   
   `
   

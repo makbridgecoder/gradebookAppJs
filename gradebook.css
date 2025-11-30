@@ -1,7 +1,3 @@
-
-* {
-}
-
 :root {
 --color-gray-50: color(display-p3 .977213 .98084 .985102);
 --color-gray-100: color(display-p3 .953567 .956796 .964321);
@@ -14,10 +10,61 @@
 --color-gray-800: color(display-p3 .125854 .159497 .216835);
 --color-gray-900: color(display-p3 .070423 .0928982 .151928);
 --color-blue-700: lab(36.9089% 35.0961 -85.6872);
+--color-input-form-background: rgb(215, 192, 151);
+--color-fieldset-background:rgb(231, 222, 175);
+--color-green-border: rgb(0, 126, 110);
+
 }
+
+*,
+*::before, 
+*::after {
+  box-sizing: border-box;
+}
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+
 
 body {
   font-family: "Noto Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container-XXL {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 0.5rem;
+  width: 100%;
+  outline: 1px solid green;
+  background-color: blue;
+
+}
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: beige;
+  outline: 1px solid red;
+}
+/*
+.row > * {
+  flex-shrink: 0;
+  max-width: 100%;
+  width: 100%;
+
+}
+*/
+.justify-content-center {
+  justify-content: center;
 }
 
 p {
@@ -31,7 +78,7 @@ h4 {
 legend {
   font-family: "Share Tech", sans-serif; 
   font-weight: 300;
-  font-size: 13px;
+  font-size: 0.8rem;
   font-style: italic;
   
 }
@@ -42,17 +89,28 @@ label {
   font-weight: 500;
   margin-bottom: 0.2rem;
   color: var(--color-gray-700)
-
+  
+}
+button {
+  border: none;
+  padding: 0.4rem;
+  border-radius: 6px;
+  border-width: 1px;
+  min-width: 100px;
+  font-family: "Share Tech", sans-serif; 
+  background-color: var(--color-gray-100);
 }
 
 input, 
 select {
-  padding: 0.5rem;
+  padding: 0.4rem;
   border-radius: 6px;
   border-width: 1px;
-  min-width: 100px;
+  min-width: 180px;
   border-color: var(--color-gray-400);
-
+  font-family: "Share Tech", sans-serif; 
+  background-color: var(--color-gray-100);
+  
 }
 
 select:hover {
@@ -62,18 +120,27 @@ select:hover {
 fieldset {
   border-radius: 5px;
   margin-bottom: 15px;
+  background-color: var(--color-fieldset-background);
+  border: 1px solid var(--color-green-border) ;
 }
 
-.row {
-  display: inline-block;
+.navbar-sect {
+  margin-top: 1rem;
 }
 
-.welcome_cnt  {
-  display: flex;
-  flex-flow:  row nowrap;
+.navbar-sect .row {
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+}
 
+
+
+.navbar-sect h1 {
+  margin: 0.2rem 1rem;
+}
+
+.navbar-sect h3 {
+  margin: 1.1rem 1rem 0.3rem;
 }
 
 .bgr_color_switch_cnt {
@@ -84,6 +151,10 @@ fieldset {
   background-color: #b6e965;
 }
 
+.gradebook_frame {
+  max-width: 300px;
+  min-width: 200px
+}
 
 .gradebook_frame div {
   margin-top: 0.3rem;
@@ -94,17 +165,84 @@ fieldset {
   border: 1px solid;
   border-color: var(--color-gray-200);
   border-radius: 10px;
-  box-shadow: 1px 1px 5px green;
+  box-shadow: 3px 1px 7px 2px rgba(114, 106, 106, 0.43);
+  background-color: var(--color-input-form-background) ;
 }
 
 #name-input-alert, 
 #surname-input-alert, 
 #score-comment {
   color: red;
+  font-size: 0.6rem;
   display: none;
   
 }
 
 .entries_cnt {
   border: 1px solid green;
+  margin-top: 1rem;
+  
+}
+
+.entries_cnt >*:not(:first-child) {
+  font-size: 0.8rem;
+
+}
+
+.add-score-btn_container {
+  display: flex;
+  justify-content: center;
+}
+
+#add-score-btn {
+  padding: 0.4rem;
+  border: 2px solid #2c2c2c;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: all 0.4s ease;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  font-weight: normal;
+
+}
+
+#add-score-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: scale(0);
+  transition: transform 0.5s ease-out;
+}
+
+#add-score-btn:hover::after {
+  transform: scale(4);
+}
+
+#add-score-btn:hover {
+  border-color: #666666;
+  background: #292929;
+}
+
+/*MEDIA QUERIES*/
+
+@media screen and (max-width: 420px)  {
+  #bgr_switch_btn {
+    display: none;
+  }
+
+  .gradebook-img {
+    display: none;
+  }
 }
