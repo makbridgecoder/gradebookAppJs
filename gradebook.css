@@ -38,21 +38,21 @@ body {
   padding: 0;
 }
 
+
 .container-XXL {
   margin-left: auto;
   margin-right: auto;
   padding: 0 0.5rem;
-  width: 100%;
   outline: 1px solid green;
   background-color: blue;
-
+  display: flex;
+  flex-direction: column;
 }
-
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  background-color: beige;
+  background-color: purple;
   outline: 1px solid red;
 }
 /*
@@ -76,7 +76,7 @@ h4 {
 }
 
 legend {
-  font-family: "Share Tech", sans-serif; 
+  font-family: "Noto Sans", sans-serif; 
   font-weight: 300;
   font-size: 0.8rem;
   font-style: italic;
@@ -97,7 +97,7 @@ button {
   border-radius: 6px;
   border-width: 1px;
   min-width: 100px;
-  font-family: "Share Tech", sans-serif; 
+  font-family: "Noto Sans", sans-serif; 
   background-color: var(--color-gray-100);
 }
 
@@ -107,8 +107,9 @@ select {
   border-radius: 6px;
   border-width: 1px;
   min-width: 180px;
+  width: 100%;
   border-color: var(--color-gray-400);
-  font-family: "Share Tech", sans-serif; 
+  font-family: "Noto Sans", sans-serif; 
   background-color: var(--color-gray-100);
   
 }
@@ -143,6 +144,10 @@ fieldset {
   margin: 1.1rem 1rem 0.3rem;
 }
 
+.gradebook-img  {
+  width: 5rem;
+}
+
 .bgr_color_switch_cnt {
   display: inline-block;
 }
@@ -152,15 +157,16 @@ fieldset {
 }
 
 .gradebook_frame {
-  max-width: 300px;
-  min-width: 200px
+  min-width: 180px;
 }
 
 .gradebook_frame div {
   margin-top: 0.3rem;
+  justify-content: center;
 }
 
 .score-add-form {
+  max-width: 250px;
   padding: 1rem;
   border: 1px solid;
   border-color: var(--color-gray-200);
@@ -179,15 +185,16 @@ fieldset {
 }
 
 .entries_cnt {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   border: 1px solid green;
   margin-top: 1rem;
+  min-width: 180px;
+  width: 100%;
   
 }
 
-.entries_cnt >*:not(:first-child) {
-  font-size: 0.8rem;
-
-}
 
 .add-score-btn_container {
   display: flex;
@@ -237,12 +244,71 @@ fieldset {
 
 /*MEDIA QUERIES*/
 
+@media screen and (max-width: 240px) {
+  .gradebook_frame,
+  .entries_cnt,
+  input,
+  select {
+    min-width: 0;
+    width: 100%;
+  }
+  .navbar-sect h1 {
+    font-size: 20px;
+  }
+
+  .navbar-sect h3 {
+    font-size: 12px;
+  }
+
+} 
+
 @media screen and (max-width: 420px)  {
+  
   #bgr_switch_btn {
     display: none;
   }
-
+  
   .gradebook-img {
     display: none;
   }
+}
+
+@media screen  and (min-width: 768px) {
+  
+  .score-add-form {
+    max-width: 700px;
+  }
+
+  .container-XXL {
+    padding: 0 2.9rem;
+  }
+  
+  .fieldset-ct {
+    display: flex;
+  }
+
+
+  .navbar-sect .row_1 {
+    max-width: 690px;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .navbar-sect .row_2 {
+    max-width: 690px;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+  
+  }
+
+
+  .navbar-welcome-part {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
 }

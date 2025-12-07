@@ -116,6 +116,7 @@ function isValidScore(score) {
 - change location of the input labels(above the input fields)
 - alert or push up before message sending to accept the record
 - how to indicate that input's have a valid value? maybe some ok?
+- get student data from DB or check if it is in the DB
 
 
 */
@@ -128,12 +129,13 @@ function addScoreEntry() {
   const grade = getGrade(scoreInputToNumber);
   entryCount++;
   const HTMLString = `
+  <div class="entry">
   <h4>${entryCount}. ${nameInput.value} ${surnameInput.value}</h4> <p>Class: ${selectClassText}</p> 
   <p>Subject: ${selectSubjectText}</p>
   <p>Type of assesments: ${selectOptionText}</p>
   
  <span> Score: ${scoreInputToNumber} &nbsp; &nbsp Grade: ${grade}</span>
-  
+  </div>
   `
   
   entriesContainer.insertAdjacentHTML('beforeend', HTMLString);
