@@ -117,6 +117,7 @@ function isValidScore(score) {
 - alert or push up before message sending to accept the record
 - how to indicate that input's have a valid value? maybe some ok?
 - get student data from DB or check if it is in the DB
+- use grid to adjust entrycontainer
 
 
 */
