@@ -4,7 +4,7 @@ const subjectDropdown = document.querySelector("#subject_dropdown");
 const classInput = document.querySelector("#class_number_entry");
 const nameInput = document.querySelector("#name-input");
 const surnameInput = document.querySelector("#surname-input");
-const assessmentDropdown = document.querySelector("#assessments_dropdown");
+const assessmentDropdown = document.getElementById("assessments_dropdown");
 const switchBtn = document.getElementById("bgr_switch_btn");
 const nameInputAlert = document.getElementById("name-input-alert");
 const surnameInputAlert = document.getElementById("surname-input-alert");
@@ -54,17 +54,17 @@ const nameRegex = /^[A-Z][a-z]{1,14}$/;
 //function to check name and surname validation
 function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
   if (input.value === '') {
-    nameAndSurnameInputAlert.style.display = "inline";
+    nameAndSurnameInputAlert.style.display = "block";
     nameAndSurnameInputAlert.textContent = "This field cannot be empty";
     input.style.borderColor = "red";
     return false;
     
   } else if (!nameRegex.test(input.value)) {
-    nameAndSurnameInputAlert.style.display = "inline";
+    nameAndSurnameInputAlert.style.display = "block";
     nameAndSurnameInputAlert.textContent = "Input must start with a capital letter and be 2-15 characters long";
     input.style.borderColor = "red";
     return false;
-
+    
   } else {
     input.style.borderColor = "green";
     nameAndSurnameInputAlert.style.display = "none";
@@ -80,7 +80,7 @@ function isValidScore(score) {
   
   if (score === "") {
     scoreComment.innerHTML = "This field cannot be empty";
-    scoreComment.style.display = "inline"
+    scoreComment.style.display = "block"
     scoreInput.style.borderColor = "red";
     return false;
   } 
@@ -89,7 +89,7 @@ function isValidScore(score) {
   
   if (isNaN(score)) {
     scoreComment.innerHTML = "Score must be a number";
-    scoreComment.style.display = "inline";
+    scoreComment.style.display = "block";
     scoreInput.style.borderColor = "red";
     console.log("Must be a number")
     return false;
@@ -105,33 +105,41 @@ function isValidScore(score) {
     
   } else {
     scoreComment.innerHTML = "Score must be between 0 and 100";
-    scoreComment.style.display = "inline";
+    scoreComment.style.display = "block";
     scoreInput.style.borderColor = "red";
     console.log("Invalid score");
     return false;
   }
 };
 /* TO DO
-- why function add a new entry if when one student data inpus is empty?(for.. of?)
-- add enties counter 
-*/
+- add function that create a random id to each record to check if there is no doubled, exacly the same record, make an alert of that
+- change location of the input labels(above the input fields)
+- alert or push up before message sending to accept the record
+- how to indicate that input's have a valid value? maybe some ok?
+- get student data from DB or check if it is in the DB
+- use grid to adjust entrycontainer
 
+
+*/
 let entryCount = 0;
 function addScoreEntry() {
+  const selectOptionText = assessmentDropdown.options[assessmentDropdown.selectedIndex].text;
+  const selectClassText = classInput.options[classInput.selectedIndex].text;
+  const selectSubjectText = subjectDropdown.options[subjectDropdown.selectedIndex].text;
   const scoreInputToNumber = Number(scoreInput.value);
   const grade = getGrade(scoreInputToNumber);
   entryCount++;
   const HTMLString = `
-  <p>${entryCount} ${nameInput.value} ${surnameInput.value} &nbsp; &nbsp ${classInput.value}</p> 
-  <p>Subject: ${subjectDropdown.value} Type of assesments: ${assessmentDropdown.value}</p>
+  <div class="entry">
+  <h4>${entryCount}. ${nameInput.value} ${surnameInput.value}</h4> <p>Class: ${selectClassText}</p> 
+  <p>Subject: ${selectSubjectText}</p>
+  <p>Type of assesments: ${selectOptionText}</p>
   
-  Score: ${scoreInputToNumber} &nbsp; &nbsp Grade: ${grade}
-  
+ <span> Score: ${scoreInputToNumber} &nbsp; &nbsp Grade: ${grade}</span>
+  </div>
   `
   
   entriesContainer.insertAdjacentHTML('beforeend', HTMLString);
-  
-  
 }
 
 addScoreBtn.addEventListener('click', (e) => { 

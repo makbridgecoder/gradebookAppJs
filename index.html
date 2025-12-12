@@ -4,92 +4,125 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gradebook</title>
-    <link href="gradebook.css" rel="stylesheet"></style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:wght@303&family=Share+Tech&display=swap" rel="stylesheet">
+    <link href="gradebook.css" rel="stylesheet">
+
   </head>
   <body>
-    <div class="row">
-      <h1 >Gradebook</h1>
-      <div class="welcome_cnt">
-        <h2>Enter data</h2>
-        <div class="bgr_color_switch_cnt">
-          <button id="bgr_switch_btn">
-            Switch background
-          </button>
+    <section class="navbar-sect">
+      <div class="container-XXL">
+        <div class="row justify-content-center row_1">
+          <div class="navbar-welcome-part">
+            <div class="welcome_cnt">
+              <h3>Welcome to</h3>
+              <h1 >Gradebook</h1>
+            </div>
+          </div>
+          <div class="navbar-bgr-switch-btn_ct">
+            <div class="bgr_color_switch_cnt">
+              <button id="bgr_switch_btn" type="button">
+                Switch background
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center row_2">
+          <h3>Please enter data</h3>
+          <div class="gradebook-counter">
+            Counter
+          </div>
         </div>
       </div>
-      <div class="gradebook_frame">
-        <form class="score-add-form">
-          <fieldset>
-            <legend>General data</legend>
-            <div class="data_form">
-              <label for="class_number_entry">Class</label>
-              <select id="class_number_entry" name="options">
-                <option value="1a" selected>1a</option>
-                <option value="1b" selected>1a</option>
-                <option value="1c" selected>1a</option>
-                <option value="2a" selected>2a</option>
-                <option value="2b" selected>2b</option>
-                <option value="2c" selected>2c</option>
-                <option value="3a" selected>3a</option>
-                <option value="3b" selected>3b</option>
-                <option value="3c" selected>3c</option>
-              </select>
-            </div>
-            <div class="data_form">
-              <label for="subject_dropdown">Subject</label>
-              <!--set up a dynamically sort with JS -->
-              <select id="subject_dropdown">
-                <option value="mathematic" >Mathematic</option>
-                <option value="chemisty" >Chemistry</option>
-                <option value="biology" >Biology</option>
-                <option value="physics" >Physics</option>
-                <option value="english" selected>English</option>
-                <option value="history" >History</option>
-                <option value="spanish" >Spanish</option>
-                <option value="physical-education" >Physical-education</option>
-                <option value="geography" >Geography</option>
-              </select>
-            </div>
-          </fieldset>
-          <fieldset><!--get student data from DB or check if it is in the DB-->
-            <legend>Student data</legend>
-            <div class="data_form">
-              <label for="name-input">Name</label>
-              <input type="text" id="name-input" ><div id="name-input-alert"></div>
-            </div>
-            <div class="data_form">
-              <label for="surname-input">Surname</label>
-              <input type="text" id="surname-input"><div id="surname-input-alert"></div>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Student score</legend>
-            <div class="data_form">
-              <label for="assessments_dropdown">Type of assessments and activities</label>
-              <select id="assessments_dropdown">
-                <option value="testquizzes" selected>Test & Quizzes</option>
-                <option value="homework">Homework</option>
-                <option value="class_participation">Class Participation</option>
-                <option value="project&presentation">Project & Presentation</option>
-                <option value="essays_&_Written Work">Essays & Written Work</option>
-                <option value="Labs & Practical Work">Labs & Practical Work</option>
-                <option value="Final Exams / Midterms">Final Exams / Midterms</option>
-              </select>
-            </div>
-            <div class="data_form">
-              <label for="score-input">Score</label>
-              <input type="number" id="score-input" ><span class="hide" id="score-comment"></span>
-            </div>
-            <div>
-              <button type="submit" id="add-score-btn">Add score</button>
-            </div>
-          </fieldset>
-        </form>
+    </section>
+    <section class="form-sect">
+      <div class="container-XXL">
+        <div class="row justify-content-center">
+          <div class="gradebook_frame">
+            <form class="score-add-form">
+              <div class="fieldset-ct">
+                <fieldset>
+                  <legend>General data</legend>
+                  <div class="data_form">
+                    <label for="class_number_entry">Class</label>
+                    <select id="class_number_entry" name="options">
+                      <option value="1a" selected>1a</option>
+                      <option value="1b" selected>1a</option>
+                      <option value="1c" selected>1a</option>
+                      <option value="2a" selected>2a</option>
+                      <option value="2b" selected>2b</option>
+                      <option value="2c" selected>2c</option>
+                      <option value="3a" selected>3a</option>
+                      <option value="3b" selected>3b</option>
+                      <option value="3c" selected>3c</option>
+                    </select>
+                  </div>
+                  <div class="data_form">
+                    <label for="subject_dropdown">Subject</label>
+                    <!--set up a dynamically sort with JS -->
+                    <select id="subject_dropdown">
+                      <option value="mathematics" >Mathematics</option>
+                      <option value="chemistry" >Chemistry</option>
+                      <option value="biology" >Biology</option>
+                      <option value="physics" >Physics</option>
+                      <option value="english" selected>English</option>
+                      <option value="history" >History</option>
+                      <option value="spanish" >Spanish</option>
+                      <option value="physical-education" >Physical-education</option>
+                      <option value="geography" >Geography</option>
+                    </select>
+                  </div>
+                </fieldset>
+                <fieldset>
+                  <legend>Student data</legend>
+                  <div class="data_form">
+                    <label for="name-input">Name</label>
+                    <input type="text" id="name-input" required><div id="name-input-alert"></div>
+                  </div>
+                  <div class="data_form">
+                    <label for="surname-input">Surname</label>
+                    <input type="text" id="surname-input" required><div id="surname-input-alert"></div>
+                  </div>
+                </fieldset>
+                <fieldset>
+                <legend>Student score</legend>
+                <div class="data_form">
+                  <label for="assessments_dropdown">Type of assessments and activities</label>
+                  <select id="assessments_dropdown">
+                    <option value="testquizzes" selected>Test & Quizzes</option>
+                    <option value="homework">Homework</option>
+                    <option value="class_participation">Class Participation</option>
+                    <option value="project&presentation">Project & Presentation</option>
+                    <option value="essays_&_Written Work">Essays & Written Work</option>
+                    <option value="Labs & Practical Work">Labs & Practical Work</option>
+                    <option value="Final Exams / Midterms">Final Exams / Midterms</option>
+                  </select>
+                </div>
+                <div class="data_form">
+                  <label for="score-input">Score</label>
+                  <input type="number" id="score-input" ><span class="hide" id="score-comment"></span>
+                </div>
+              </fieldset>
+
+              </div>
+              <div class="add-score-btn_container">
+                <button type="submit" id="add-score-btn">Add score</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="entries_cnt">
-        
+    </section>
+    <section class="records-sect">
+      <div class="container-XXL">
+        <div class="row justify-content-center">
+          <div class="entries_cnt">
+          </div>
+        </div>
       </div>
-    </div>
-    <script src="GradebookApp.js"></script>
+    </section>
+   <script src="GradebookApp.js"></script> 
   </body>
 </html>
