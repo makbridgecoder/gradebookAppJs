@@ -12,6 +12,8 @@ const addScoreBtn = document.getElementById("add-score-btn");
 const scoreInput = document.getElementById("score-input");
 const scoreComment = document.getElementById("score-comment"); 
 const entriesContainer = document.querySelector(".entries_cnt");
+const entriesCounterContainer = document.querySelector("gradebook-counter");
+const entriesCounter = document.getElementById("gradebook-counter_id"); 
 let scoreIsValid = false;
 
 const backgroundColorsArr = [
@@ -140,6 +142,8 @@ function addScoreEntry() {
   `
   
   entriesContainer.insertAdjacentHTML('beforeend', HTMLString);
+  console.log(entryCount)
+  entriesCounter.innerText = entryCount;
 }
 
 addScoreBtn.addEventListener('click', (e) => { 
