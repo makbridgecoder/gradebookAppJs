@@ -12,7 +12,6 @@ const addScoreBtn = document.getElementById("add-score-btn");
 const scoreInput = document.getElementById("score-input");
 const scoreComment = document.getElementById("score-comment"); 
 const entriesContainer = document.querySelector(".entries_cnt");
-const entriesCounterContainer = document.querySelector("gradebook-counter");
 const entriesCounter = document.getElementById("gradebook-counter_id"); 
 let scoreIsValid = false;
 
@@ -124,6 +123,34 @@ function isValidScore(score) {
 
 */
 let entryCount = 0;
+let entryContainerArray = [];
+function addEntryToArray() {
+    const name = nameInput.value;
+    const surname = surnameInput.value;
+    const className = classInput.value;
+    const subject = subjectDropdown.value;
+    const assessmentType = assessmentDropdown.value;
+    const scoreInputToNumber = Number(scoreInput.value);
+    const grade = getGrade(scoreInputToNumber);
+
+    const newScoreEntry = {
+      name,
+      surname, 
+      className, 
+      subject, 
+      assessmentType, 
+      scoreInputToNumber,              
+      grade};
+
+
+    entryContainerArray.push(newScoreEntry);
+    console.log(newScoreEntry);
+    return newScoreEntry;
+
+  };
+
+
+
 function addScoreEntry() {
   const selectOptionText = assessmentDropdown.options[assessmentDropdown.selectedIndex].text;
   const selectClassText = classInput.options[classInput.selectedIndex].text;
@@ -131,6 +158,8 @@ function addScoreEntry() {
   const scoreInputToNumber = Number(scoreInput.value);
   const grade = getGrade(scoreInputToNumber);
   entryCount++;
+  
+
   const HTMLString = `
   <div class="entry">
   <h4>${entryCount}. ${nameInput.value} ${surnameInput.value}</h4> <p>Class: ${selectClassText}</p> 
@@ -140,9 +169,10 @@ function addScoreEntry() {
  <span> Score: ${scoreInputToNumber} &nbsp; &nbsp Grade: ${grade}</span>
   </div>
   `
-  
+  addEntryToArray();
   entriesContainer.insertAdjacentHTML('beforeend', HTMLString);
-  console.log(entryCount)
+  console.log(entryCount);
+  console.log(entryContainerArray);
   entriesCounter.innerText = entryCount;
 }
 
