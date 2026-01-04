@@ -184,14 +184,13 @@ fieldset {
   
 }
 
-.entries_cnt {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+.entries {
   border: 1px solid green;
+  background-color: var(--color-gray-50);
   margin-top: 1rem;
-  min-width: 180px;
   width: 100%;
+  padding: 1rem;
+
   
 }
 

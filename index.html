@@ -27,7 +27,7 @@
                 Switch background
               </button>
             </div>
-          </div>
+          </div> 
         </div>
         <div class="row justify-content-center row_2">
           <h3>Please enter data</h3>
@@ -51,14 +51,14 @@
                     <label for="class_number_entry">Class</label>
                     <select id="class_number_entry" name="options">
                       <option value="1a" selected>1a</option>
-                      <option value="1b" selected>1a</option>
-                      <option value="1c" selected>1a</option>
-                      <option value="2a" selected>2a</option>
-                      <option value="2b" selected>2b</option>
-                      <option value="2c" selected>2c</option>
-                      <option value="3a" selected>3a</option>
-                      <option value="3b" selected>3b</option>
-                      <option value="3c" selected>3c</option>
+                      <option value="1b">1a</option>
+                      <option value="1c">1a</option>
+                      <option value="2a">2a</option>
+                      <option value="2b">2b</option>
+                      <option value="2c">2c</option>
+                      <option value="3a">3a</option>
+                      <option value="3b">3b</option>
+                      <option value="3c">3c</option>
                     </select>
                   </div>
                   <div class="data_form">
@@ -120,8 +120,15 @@
     <section class="records-sect">
       <div class="container-XXL">
         <div class="row justify-content-center">
-          <div class="entries_cnt">
-          </div>
+            <div class="entries">
+              <h2 class="entries__title">Entries</h2>
+              <p class="entries__empty" id="entriesEmpty">
+                No entries yet. Add your first grade above.
+              </p>
+              <ul class="entries__list" id="entriesList">
+
+              </ul>
+            </div>
         </div>
       </div>
     </section>
