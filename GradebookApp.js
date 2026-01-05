@@ -1,5 +1,5 @@
 const body = document.querySelector("body");
-const scoreAdd = document.querySelector(".score-add-form");
+const scoreAddForm = document.querySelector(".score-add-form");
 const subjectDropdown = document.querySelector("#subject_dropdown"); 
 const classInput = document.querySelector("#class_number_entry");
 const nameInput = document.querySelector("#name-input");
@@ -120,77 +120,11 @@ function isValidScore(score) {
 - how to indicate that input's have a valid value? maybe some ok?
 - get student data from DB or check if it is in the DB
 - use grid to adjust entrycontainer
+- refactor code using data-* attributes
 
 
 */
-/*
-let entryCount = 0;
-let entryContainerArray = [];
-function addEntryToArray() {
-    const name = nameInput.value;
-    const surname = surnameInput.value;
-    const className = classInput.value;
-    const subject = subjectDropdown.value;
-    const assessmentType = assessmentDropdown.value;
-    const scoreInputToNumber = Number(scoreInput.value);
-    const grade = getGrade(scoreInputToNumber);
 
-    const newScoreEntry = {
-      name,
-      surname, 
-      className, 
-      subject, 
-      assessmentType, 
-      scoreInputToNumber,              
-      grade};
-
-
-    entryContainerArray.push(newScoreEntry);
-    console.log(newScoreEntry);
-    return newScoreEntry;
-
-  };
-
-
-
-function addScoreEntry() {
-  const selectOptionText = assessmentDropdown.options[assessmentDropdown.selectedIndex].text;
-  const selectClassText = classInput.options[classInput.selectedIndex].text;
-  const selectSubjectText = subjectDropdown.options[subjectDropdown.selectedIndex].text;
-  const scoreInputToNumber = Number(scoreInput.value);
-  const grade = getGrade(scoreInputToNumber);
-  entryCount++;
-  
-
-  const HTMLString = `
-  <div class="entry">
-  <h4>${entryCount}. ${nameInput.value} ${surnameInput.value}</h4> <p>Class: ${selectClassText}</p> 
-  <p>Subject: ${selectSubjectText}</p>
-  <p>Type of assesments: ${selectOptionText}</p>
-  
- <span> Score: ${scoreInputToNumber} &nbsp; &nbsp Grade: ${grade}</span>
-  </div>
-  `
-  addEntryToArray();
-  entriesContainer.insertAdjacentHTML('beforeend', HTMLString);
-  console.log(entryCount);
-  console.log(entryContainerArray);
-  entriesCounter.innerText = entryCount;
-}
-
-addScoreBtn.addEventListener('click', (e) => { 
-  e.preventDefault();
-  const scoreValue = scoreInput.value;
-  const isScoreValid = isValidScore(scoreValue);
-  const isNameValid = nameAndsurnameValidation(e, nameInput, nameInputAlert); 
-  const isSurnameValid = nameAndsurnameValidation(e, surnameInput, surnameInputAlert); 
-  if (!isNameValid || !isSurnameValid || !isScoreValid) {
-      console.log("validation failed");
-      return;
-    } 
-    addScoreEntry();
-  }
-); */
 
 let entries = []; //array with entries
 console.log(entries);
@@ -256,10 +190,21 @@ function addEntry() {
 }
 
 entriesList.addEventListener("click", (e) => {
+   const btn = e.target.closest('button[data-action="delete"]');
+   if (!btn) return;
+
+   const li = btn.closest(".entry");
+   if (!li) return; 
+
+   const id = li.dataset.id;
+
+    entries = entries.filter((entry) => entry.id !== id);
+    renderEntries();
+   
 
 })
 
-scoreAdd.addEventListener('click', (e) => { 
+scoreAddForm.addEventListener('submit', (e) => { 
   e.preventDefault();
   const scoreValue = scoreInput.value;
   const isScoreValid = isValidScore(scoreValue);
@@ -270,6 +215,11 @@ scoreAdd.addEventListener('click', (e) => {
       return;
     } 
     addEntry();
+    scoreAddForm.reset();
+    nameInput.style.borderColor = "";
+    surnameInput.style.borderColor = "";
+    scoreInput.style.borderColor = "";
+
 
   
 });
