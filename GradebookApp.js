@@ -131,7 +131,6 @@ console.log(entries);
 
 function updateCounter() {
 entriesCounter.innerText = String(entries.length);
-console.log(entriesCounter);
 }
 
 function toggleEmptyState() {
@@ -149,10 +148,17 @@ function renderEntries() {
 
 
     li.innerHTML = `
-    <span class="entry__name">${index + 1}. ${entry.name} ${entry.surname}</span>
-    <span class="entry__score">${entry.score}</span>
-    <span class="entry__grade">${entry.grade}</span>
-    <button type="button" class="entry__delete" data-action="delete">Delete</button>
+    <div class="entry__main">
+      <span class="entry__name">${index + 1}. ${entry.name} ${entry.surname}</span>
+      <span class="entry__score">${entry.score}</span>
+      <span class="entry__grade">${entry.grade}</span>
+      <button type="button" class="entry__delete" data-action="delete">Delete</button>
+    </div>
+    <div class="entry__meta">
+      <span>Class: ${entry.className}</span>
+      <span>Subject: ${entry.subject}</span>
+      <span>Assessment: ${entry.assessmentType}</span>
+    </div>
     `;
 
     entriesList.appendChild(li);
