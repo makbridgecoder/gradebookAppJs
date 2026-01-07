@@ -1,5 +1,5 @@
 const body = document.querySelector("body");
-const scoreAdd = document.querySelector(".score-add-form");
+const scoreAddForm = document.querySelector(".score-add-form");
 const subjectDropdown = document.querySelector("#subject_dropdown"); 
 const classInput = document.querySelector("#class_number_entry");
 const nameInput = document.querySelector("#name-input");
@@ -11,8 +11,10 @@ const surnameInputAlert = document.getElementById("surname-input-alert");
 const addScoreBtn = document.getElementById("add-score-btn");
 const scoreInput = document.getElementById("score-input");
 const scoreComment = document.getElementById("score-comment"); 
-const entriesContainer = document.querySelector(".entries_cnt");
 const entriesCounter = document.getElementById("gradebook-counter_id"); 
+const entriesList = document.getElementById("entriesList");
+const entriesEmpty = document.getElementById("entriesEmpty");
+
 let scoreIsValid = false;
 
 const backgroundColorsArr = [
@@ -114,69 +116,105 @@ function isValidScore(score) {
 };
 /* TO DO
 - add function that create a random id to each record to check if there is no doubled, exacly the same record, make an alert of that
-- change location of the input labels(above the input fields)
 - alert or push up before message sending to accept the record
 - how to indicate that input's have a valid value? maybe some ok?
 - get student data from DB or check if it is in the DB
 - use grid to adjust entrycontainer
+- refactor code using data-* attributes
 
 
 */
-let entryCount = 0;
-let entryContainerArray = [];
-function addEntryToArray() {
-    const name = nameInput.value;
-    const surname = surnameInput.value;
-    const className = classInput.value;
-    const subject = subjectDropdown.value;
-    const assessmentType = assessmentDropdown.value;
-    const scoreInputToNumber = Number(scoreInput.value);
-    const grade = getGrade(scoreInputToNumber);
-
-    const newScoreEntry = {
-      name,
-      surname, 
-      className, 
-      subject, 
-      assessmentType, 
-      scoreInputToNumber,              
-      grade};
 
 
-    entryContainerArray.push(newScoreEntry);
-    console.log(newScoreEntry);
-    return newScoreEntry;
+let entries = []; //array with entries
+console.log(entries);
 
-  };
-
-
-
-function addScoreEntry() {
-  const selectOptionText = assessmentDropdown.options[assessmentDropdown.selectedIndex].text;
-  const selectClassText = classInput.options[classInput.selectedIndex].text;
-  const selectSubjectText = subjectDropdown.options[subjectDropdown.selectedIndex].text;
-  const scoreInputToNumber = Number(scoreInput.value);
-  const grade = getGrade(scoreInputToNumber);
-  entryCount++;
-  
-
-  const HTMLString = `
-  <div class="entry">
-  <h4>${entryCount}. ${nameInput.value} ${surnameInput.value}</h4> <p>Class: ${selectClassText}</p> 
-  <p>Subject: ${selectSubjectText}</p>
-  <p>Type of assesments: ${selectOptionText}</p>
-  
- <span> Score: ${scoreInputToNumber} &nbsp; &nbsp Grade: ${grade}</span>
-  </div>
-  `
-  addEntryToArray();
-  entriesContainer.insertAdjacentHTML('beforeend', HTMLString);
-  console.log(entryCount);
-  console.log(entryContainerArray);
-  entriesCounter.innerText = entryCount;
+function updateCounter() {
+entriesCounter.innerText = String(entries.length);
 }
 
-addScoreBtn.addEventListener('click', (e) => { 
+function toggleEmptyState() {
+  if (!entriesEmpty) return;
+  entriesEmpty.style.display = entries.length === 0 ? "block" : "none";
+}
+
+function renderEntries() {
+  entriesList.innerHTML = ""; 
+
+  entries.forEach((entry, index) => {
+    const li = document.createElement("li");
+    li.className = "entry";
+    li.dataset.id = entry.id; 
+
+
+    li.innerHTML = `
+    <div class="entry__main">
+      <span class="entry__name">${index + 1}. ${entry.name} ${entry.surname}</span>
+      <span class="entry__score">${entry.score}</span>
+      <span class="entry__grade">${entry.grade}</span>
+      <button type="button" class="entry__delete" data-action="delete">Delete</button>
+    </div>
+    <div class="entry__meta">
+      <span>Class: ${entry.className}</span>
+      <span>Subject: ${entry.subject}</span>
+      <span>Assessment: ${entry.assessmentType}</span>
+    </div>
+    `;
+
+    entriesList.appendChild(li);
+
+
+
+  });
+
+  toggleEmptyState();
+  updateCounter();
+
+}
+
+function getSelectedLabel(selectElement) {
+  return selectElement.options[selectElement.selectedIndex].text;
+}
+
+function createEntry() {
+  const score = Number(scoreInput.value); 
+
+  return {
+    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+    name: nameInput.value.trim(),
+    surname: surnameInput.value.trim(),
+    className: getSelectedLabel(classInput),
+    subject: getSelectedLabel(subjectDropdown), 
+    assessmentType: getSelectedLabel(assessmentDropdown), 
+    score, 
+    grade: getGrade(score),
+  };
+
+}
+
+
+function addEntry() {
+  const entry = createEntry();
+  entries.push(entry);
+  renderEntries();
+}
+
+entriesList.addEventListener("click", (e) => {
+   const btn = e.target.closest('button[data-action="delete"]');
+   if (!btn) return;
+
+   const li = btn.closest(".entry");
+   if (!li) return; 
+
+   const id = li.dataset.id;
+
+    entries = entries.filter((entry) => entry.id !== id);
+    renderEntries();
+   
+
+})
+
+scoreAddForm.addEventListener('submit', (e) => { 
   e.preventDefault();
   const scoreValue = scoreInput.value;
   const isScoreValid = isValidScore(scoreValue);
@@ -186,9 +224,16 @@ addScoreBtn.addEventListener('click', (e) => {
       console.log("validation failed");
       return;
     } 
-    addScoreEntry();
-  }
-);
+    addEntry();
+    scoreAddForm.reset();
+    nameInput.style.borderColor = "";
+    surnameInput.style.borderColor = "";
+    scoreInput.style.borderColor = "";
+
+
+  
+});
+
   
 //function to convert score to letter grade
 function getGrade(score) {
