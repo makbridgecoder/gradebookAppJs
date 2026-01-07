@@ -172,6 +172,10 @@ function renderEntries() {
 
 }
 
+function getSelectedLabel(selectElement) {
+  return selectElement.options[selectElement.selectedIndex].text;
+}
+
 function createEntry() {
   const score = Number(scoreInput.value); 
 
@@ -179,9 +183,9 @@ function createEntry() {
     id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
     name: nameInput.value.trim(),
     surname: surnameInput.value.trim(),
-    className: classInput.value,
-    subject: subjectDropdown.value, 
-    assessmentType: assessmentDropdown.value, 
+    className: getSelectedLabel(classInput),
+    subject: getSelectedLabel(subjectDropdown), 
+    assessmentType: getSelectedLabel(assessmentDropdown), 
     score, 
     grade: getGrade(score),
   };
