@@ -54,29 +54,12 @@ function getAverageScore(scores) {
 
 //Name validation 
 const nameRegex = /^[A-Z][a-z]{1,14}$/;
-<<<<<<< HEAD
- 
 //function to check name and surname validation
-
-=======
-//function to check name and surname validation
->>>>>>> main
 function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
   if (input.value === '') {
     nameAndSurnameInputAlert.style.display = "block";
     nameAndSurnameInputAlert.textContent = "This field cannot be empty";
     input.style.borderColor = "red";
-<<<<<<< HEAD
-    
-  } else if (!nameRegex.test(input.value)) {
-    nameAndSurnameInputAlert.style.display = "inline";
-    nameAndSurnameInputAlert.textContent = "Input must start with a capital letter and be 2-15 characters long";
-    input.style.borderColor = "red";
-
-  } else {
-    input.style.borderColor = "green";
-    nameAndSurnameInputAlert.style.display = "none";
-=======
     return false;
     
   } else if (!nameRegex.test(input.value)) {
@@ -89,27 +72,10 @@ function nameAndsurnameValidation(e, input, nameAndSurnameInputAlert) {
     input.style.borderColor = "green";
     nameAndSurnameInputAlert.style.display = "none";
     return true;
->>>>>>> main
   }
   
 }; 
 
-<<<<<<< HEAD
-scoreAdd.addEventListener("submit", (e) => {
-  nameAndsurnameValidation(e, nameInput, nameInputAlert); 
-  nameAndsurnameValidation(e, surnameInput, surnameInputAlert); 
-  //place for next function
-});
-//! finish this function / validation
-//function to check validation of score
-
-function isValidScore(score) {
-
-  if (score === "") {
-    console.log("empty score");
-    scoreComment.innerHTML = "This field cannot be empty";
-    scoreComment.style.display = "inline"
-=======
 
 //function to check validation of score
 
@@ -118,32 +84,11 @@ function isValidScore(score) {
   if (score === "") {
     scoreComment.innerHTML = "This field cannot be empty";
     scoreComment.style.display = "block"
->>>>>>> main
     scoreInput.style.borderColor = "red";
     return false;
   } 
   
   score = Number(score);
-<<<<<<< HEAD
-
-  if (isNaN(score)) {
-    scoreComment.innerHTML = "Score must be a number";
-    scoreComment.style.display = "inline";
-    scoreInput.style.borderColor = "red";
-    console.log("Must be a number")
-    return false;
-  } 
-  
-  if (score >= 0 && score <= 100) {
-    console.log("Valid score");
-    scoreComment.style.display = "none";
-    scoreInput.style.borderColor = "green";
-    return true;
-    
-  } else {
-    scoreComment.innerHTML = "Score must be between 0 and 100";
-    scoreComment.style.display = "inline";
-=======
   
   if (isNaN(score)) {
     scoreComment.innerHTML = "Score must be a number";
@@ -164,20 +109,11 @@ function isValidScore(score) {
   } else {
     scoreComment.innerHTML = "Score must be between 0 and 100";
     scoreComment.style.display = "block";
->>>>>>> main
     scoreInput.style.borderColor = "red";
     console.log("Invalid score");
     return false;
   }
 };
-<<<<<<< HEAD
-
-addScoreBtn.addEventListener('click', () => { 
-  const scoreValue = scoreInput.value;
-  isValidScore(scoreValue);
-  console.log("click is ok")
-});
-=======
 /* TO DO
 - add function that create a random id to each record to check if there is no doubled, exacly the same record, make an alert of that
 - alert or push up before message sending to accept the record
@@ -196,7 +132,6 @@ console.log(entries);
 function updateCounter() {
 entriesCounter.innerText = String(entries.length);
 }
->>>>>>> main
 
 function toggleEmptyState() {
   if (!entriesEmpty) return;
@@ -301,10 +236,6 @@ scoreAddForm.addEventListener('submit', (e) => {
 
   
 //function to convert score to letter grade
-<<<<<<< HEAD
-/*
-=======
->>>>>>> main
 function getGrade(score) {
 
     if (score == 100) return "A++";
@@ -316,12 +247,9 @@ function getGrade(score) {
     
 };
 
-<<<<<<< HEAD
-=======
 
 /*
 
->>>>>>> main
 //function to check if student has a passing check
 
 function hasPassingGrade(score) {
