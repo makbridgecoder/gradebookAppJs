@@ -35,10 +35,10 @@ gradebook-app/
 
 The app is still under development. Many planned features are not yet implemented.
 
-- [ ] Input form for adding student names and grades
+- [x] Input form for adding student names and grades
 - [ ] Display list of students with their average scores
 - [ ] Edit or delete student entries
-- [ ] Form validation
+- [x] Form validation
 - [x] Calculate average from an array of grades
 - [ ] Store data in `localStorage`
 - [ ] Export grades to CSV
