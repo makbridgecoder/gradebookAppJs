@@ -1,7 +1,7 @@
 const body = document.querySelector("body");
 const scoreAddForm = document.querySelector(".score-add-form");
 const subjectDropdown = document.querySelector("#subject_dropdown"); 
-const classInput = document.querySelector("#class_number_entry");
+const classSelect = document.querySelector("#class_select");
 const nameInput = document.querySelector("#name-input");
 const surnameInput = document.querySelector("#surname-input");
 const assessmentDropdown = document.getElementById("assessments_dropdown");
@@ -121,13 +121,13 @@ function isValidScore(score) {
 - get student data from DB or check if it is in the DB
 - use grid to adjust entrycontainer
 - refactor code using data-* attributes
+- check validation function - trim leading and trailing whitespace
 
 
 */
 
 
 let entries = []; //array with entries
-console.log(entries);
 
 function updateCounter() {
 entriesCounter.innerText = String(entries.length);
@@ -162,9 +162,6 @@ function renderEntries() {
     `;
 
     entriesList.appendChild(li);
-
-
-
   });
 
   toggleEmptyState();
@@ -183,7 +180,7 @@ function createEntry() {
     id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
     name: nameInput.value.trim(),
     surname: surnameInput.value.trim(),
-    className: getSelectedLabel(classInput),
+    className: getSelectedLabel(classSelect),
     subject: getSelectedLabel(subjectDropdown), 
     assessmentType: getSelectedLabel(assessmentDropdown), 
     score, 
@@ -192,12 +189,33 @@ function createEntry() {
 
 }
 
-
 function addEntry() {
   const entry = createEntry();
   entries.push(entry);
   renderEntries();
+  saveEntries();
 }
+
+// localstorage
+const STORAGE_KEY = "gradebookEntries"; //name of storage
+
+function saveEntries() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+
+}
+
+function loadEntries() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  console.log(stored);
+  if (!stored) return; 
+  
+  entries = JSON.parse(stored);
+  renderEntries();
+
+}
+
+loadEntries();
+
 
 entriesList.addEventListener("click", (e) => {
    const btn = e.target.closest('button[data-action="delete"]');
@@ -210,7 +228,7 @@ entriesList.addEventListener("click", (e) => {
 
     entries = entries.filter((entry) => entry.id !== id);
     renderEntries();
-   
+    saveEntries();
 
 })
 
@@ -234,7 +252,7 @@ scoreAddForm.addEventListener('submit', (e) => {
   
 });
 
-  
+ 
 //function to convert score to letter grade
 function getGrade(score) {
 
