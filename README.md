@@ -1,21 +1,40 @@
 # Gradebook App
 
-A simple and lightweight web application built with JavaScript to help teachers manage and grade students' test results. This project was created primarily as a learning exercise to practice core front-end skills such as JavaScript, HTML, and CSS.
+A simple, lightweight gradebook application built with vanilla JavaScript.  
+The app allows adding, validating, displaying, deleting, and persisting student grade entries.
+
+This project was created as a **learning-focused front-end exercise**, with an emphasis on clean JavaScript logic, DOM manipulation, and Git workflow.
 
 ## ✨ Features
 
-- Accepts an array of grades and calculates the average
-- Basic structure and layout prepared for further development
+- Add student grade entries via a validated form
+- Real-time rendering of entries list
+- Delete individual entries
+- Persistent data storage using `localStorage`
+- Automatic entry counter
+- Empty-state handling when no data is present
+- Human-readable labels from `<select>` inputs
+- Unique ID generation for each entry
 
 ## 🎯 Purpose
 
-This app was developed mainly for practice and educational purposes. It simulates a basic grade management tool that could assist teachers in organizing and reviewing student performance.
+The goal of this project is to practice **core front-end fundamentals**:
+
+- JavaScript logic and data flow
+- DOM manipulation
+- Form validation
+- State management
+- Local storage persistence
+- Incremental feature development with Git branches
+
+This is **not a production app**, but a structured learning project that evolves feature by feature.
 
 ## 🛠️ Tech Stack
 
 - HTML5
 - CSS3
-- JavaScript 
+- JavaScript (ES6+)
+- Browser `localStorage`
 
 ## 🚀 Getting Started
 
@@ -28,26 +47,26 @@ This app was developed mainly for practice and educational purposes. It simulate
 gradebook-app/
 │
 ├── index.html
-├── style.css
-└── script.js
+├── gradebook.css
+└── GradebookApp.js
 
 3. To Do
 
 The app is still under development. Many planned features are not yet implemented.
 
 - [x] Input form for adding student names and grades
-- [ ] Display list of students with their average scores
-- [ ] Edit or delete student entries
 - [x] Form validation
+- [x] Display list of entries
+- [x] Delete entries
 - [x] Calculate average from an array of grades
-- [ ] Store data in `localStorage`
+- [x] Persist data using 'localStorage'
+- [ ] Edit existing entries
+- [ ] Sorting and filtering
 - [ ] Export grades to CSV
-- [ ] Add subjects or categories per test
-- [ ] Sorting and filtering student data
-- [ ] Responsive table layout
+- [ ] Responsive layout improvements
 - [ ] Light/dark theme toggle
-- [ ] Polish UI and improve accessibility
-- [ ] Unit testing (optional)
+- [ ] UI polish and accessibility improvements
+- [ ] Unit tests (optional)Unit testing (optional)
 
 ## 📬 Contact
 
