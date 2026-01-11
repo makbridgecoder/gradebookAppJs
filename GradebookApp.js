@@ -219,7 +219,10 @@ loadEntries();
 
 entriesList.addEventListener("click", (e) => {
    const btn = e.target.closest('button[data-action="delete"]');
+   console.log(typeof e);
    if (!btn) return;
+
+   if (!confirm("Are you sure you want to delete this entry?")) return;
 
    const li = btn.closest(".entry");
    if (!li) return; 
