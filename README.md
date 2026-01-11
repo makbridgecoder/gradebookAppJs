@@ -5,6 +5,10 @@ The app allows adding, validating, displaying, deleting, and persisting student 
 
 This project was created as a **learning-focused front-end exercise**, with an emphasis on clean JavaScript logic, DOM manipulation, and Git workflow.
 
+## 🔗 Live Demo
+
+https://makbridgecoder.github.io/gradebookAppJs/
+
 ## ✨ Features
 
 - Add student grade entries via a validated form
