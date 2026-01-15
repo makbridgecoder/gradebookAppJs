@@ -15,7 +15,6 @@ const entriesCounter = document.getElementById("gradebook-counter_id");
 const entriesList = document.getElementById("entriesList");
 const entriesEmpty = document.getElementById("entriesEmpty");
 
-let scoreIsValid = false;
 
 const backgroundColorsArr = [
   "#D6A99D",
@@ -102,7 +101,6 @@ function isValidScore(score) {
   if (score >= 0 && score <= 100) {
     scoreComment.style.display = "none";
     scoreInput.style.borderColor = "green";
-    scoreIsValid = true;
     return true ;
     
     
@@ -128,6 +126,7 @@ function isValidScore(score) {
 
 
 let entries = []; //array with entries
+let editingId = null; 
 
 function updateCounter() {
 entriesCounter.innerText = String(entries.length);
@@ -152,6 +151,7 @@ function renderEntries() {
       <span class="entry__name">${index + 1}. ${entry.name} ${entry.surname}</span>
       <span class="entry__score">${entry.score}</span>
       <span class="entry__grade">${entry.grade}</span>
+      <button type="button" class="entry__edit" data-action="edit">Edit</button>
       <button type="button" class="entry__delete" data-action="delete">Delete</button>
     </div>
     <div class="entry__meta">
@@ -173,11 +173,19 @@ function getSelectedLabel(selectElement) {
   return selectElement.options[selectElement.selectedIndex].text;
 }
 
-function createEntry() {
+function setSelectByText(selectElement, text) {
+  const options = Array.from(selectElement.options); //conversion from array-like collection into array
+  const index = options.findIndex(opt => opt.text === text);
+  if (index !== -1) selectElement.selectedIndex = index;
+}
+
+
+
+function createEntry(existingId = null) {
   const score = Number(scoreInput.value); 
 
   return {
-    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+    id: existingId ?? (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())),
     name: nameInput.value.trim(),
     surname: surnameInput.value.trim(),
     className: getSelectedLabel(classSelect),
@@ -188,7 +196,6 @@ function createEntry() {
   };
 
 }
-
 function addEntry() {
   const entry = createEntry();
   entries.push(entry);
@@ -201,60 +208,124 @@ const STORAGE_KEY = "gradebookEntries"; //name of storage
 
 function saveEntries() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-
+  
 }
 
 function loadEntries() {
   const stored = localStorage.getItem(STORAGE_KEY);
-  console.log(stored);
   if (!stored) return; 
   
   entries = JSON.parse(stored);
   renderEntries();
-
+  
 }
 
 loadEntries();
 
 
-entriesList.addEventListener("click", (e) => {
-   const btn = e.target.closest('button[data-action="delete"]');
-   console.log(typeof e);
+function startEditing(entry) {
+  
+  editingId = entry.id; 
+  nameInput.value = entry.name;
+  surnameInput.value = entry.surname;
+  scoreInput.value = entry.score;
+  
+  setSelectByText(classSelect, entry.className);
+  setSelectByText(subjectDropdown, entry.subject);
+  setSelectByText(assessmentDropdown, entry.assessmentType);
+  
+  addScoreBtn.textContent = "Update entry";
+  
+
+}
+
+
+function stopEditing() {
+  editingId = null;
+  addScoreBtn.textContent = "Add score";
+}
+
+
+ entriesList.addEventListener("click", (e) => { 
+   const btn = e.target.closest('button[data-action]');
    if (!btn) return;
-
-   if (!confirm("Are you sure you want to delete this entry?")) return;
-
+   
    const li = btn.closest(".entry");
    if (!li) return; 
+   
+    const action = btn.dataset.action; 
+    const id = li.dataset.id;
+    
+    if (action === "delete") {
+      if (!confirm("Are you sure you want to delete this entry?")) return;
+      
+      entries = entries.filter((entry) => entry.id !== id);
+      renderEntries();
+      saveEntries();
+      
+      //study this later - what's going on when a delete record during the edition?
 
-   const id = li.dataset.id;
 
-    entries = entries.filter((entry) => entry.id !== id);
-    renderEntries();
-    saveEntries();
+      if (editingId === id) { 
+        scoreAddForm.reset();
+        stopEditing();
+      }
+      
+      return;
+    }
+    
+    if (action === "edit") {
+      console.log(entries);
+      const entryToEdit = entries.find(entry => entry.id === id); 
+      if (!entryToEdit) return;
+      
+      startEditing(entryToEdit);
 
-})
+      return;
+      
+    }
+    
+    
+    
+  })
+  
+  scoreAddForm.addEventListener('submit', (e) => { 
+    e.preventDefault();
+    const scoreValue = scoreInput.value;
+    const isScoreValid = isValidScore(scoreValue);
+    const isNameValid = nameAndsurnameValidation(e, nameInput, nameInputAlert); 
+    const isSurnameValid = nameAndsurnameValidation(e, surnameInput, surnameInputAlert); 
 
-scoreAddForm.addEventListener('submit', (e) => { 
-  e.preventDefault();
-  const scoreValue = scoreInput.value;
-  const isScoreValid = isValidScore(scoreValue);
-  const isNameValid = nameAndsurnameValidation(e, nameInput, nameInputAlert); 
-  const isSurnameValid = nameAndsurnameValidation(e, surnameInput, surnameInputAlert); 
-  if (!isNameValid || !isSurnameValid || !isScoreValid) {
+    if (!isNameValid || !isSurnameValid || !isScoreValid) {
       console.log("validation failed");
       return;
     } 
-    addEntry();
+
+
+    if (editingId) {
+      const updatedEntry = createEntry(editingId);
+
+      entries = entries.map(entry => 
+        entry.id === editingId ? updatedEntry : entry
+      );
+      renderEntries();
+      saveEntries();
+      stopEditing();
+
+    } else {
+      addEntry();
+    }
+
+
     scoreAddForm.reset();
     nameInput.style.borderColor = "";
     surnameInput.style.borderColor = "";
     scoreInput.style.borderColor = "";
-
-
+    
+    
+    
+  });
   
-});
-
  
 //function to convert score to letter grade
 function getGrade(score) {
