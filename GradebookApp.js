@@ -15,7 +15,6 @@ const entriesCounter = document.getElementById("gradebook-counter_id");
 const entriesList = document.getElementById("entriesList");
 const entriesEmpty = document.getElementById("entriesEmpty");
 
-let scoreIsValid = false;
 
 const backgroundColorsArr = [
   "#D6A99D",
@@ -102,7 +101,6 @@ function isValidScore(score) {
   if (score >= 0 && score <= 100) {
     scoreComment.style.display = "none";
     scoreInput.style.borderColor = "green";
-    scoreIsValid = true;
     return true ;
     
     
@@ -128,7 +126,7 @@ function isValidScore(score) {
 
 
 let entries = []; //array with entries
-let editingId = []; 
+let editingId = null; 
 
 function updateCounter() {
 entriesCounter.innerText = String(entries.length);
@@ -180,15 +178,14 @@ function setSelectByText(selectElement, text) {
   const index = options.findIndex(opt => opt.text === text);
   if (index !== -1) selectElement.selectedIndex = index;
 }
-console.log(setSelectByText(classSelect, "1a"));
 
 
 
-function createEntry() {
+function createEntry(existingId = null) {
   const score = Number(scoreInput.value); 
 
   return {
-    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+    id: existingId ?? (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())),
     name: nameInput.value.trim(),
     surname: surnameInput.value.trim(),
     className: getSelectedLabel(classSelect),
@@ -199,8 +196,6 @@ function createEntry() {
   };
 
 }
-
-
 function addEntry() {
   const entry = createEntry();
   entries.push(entry);
@@ -231,7 +226,6 @@ loadEntries();
 function startEditing(entry) {
   
   editingId = entry.id; 
-  console.log(editingId);
   nameInput.value = entry.name;
   surnameInput.value = entry.surname;
   scoreInput.value = entry.score;
@@ -248,7 +242,7 @@ function startEditing(entry) {
 
 function stopEditing() {
   editingId = null;
-  addScoreBtn.textContent = "Add Score";
+  addScoreBtn.textContent = "Add score";
 }
 
 
@@ -309,8 +303,7 @@ function stopEditing() {
 
 
     if (editingId) {
-      const updatedEntry = createEntry();
-      updatedEntry.id = editingId;
+      const updatedEntry = createEntry(editingId);
 
       entries = entries.map(entry => 
         entry.id === editingId ? updatedEntry : entry
@@ -324,7 +317,6 @@ function stopEditing() {
     }
 
 
-    addEntry();
     scoreAddForm.reset();
     nameInput.style.borderColor = "";
     surnameInput.style.borderColor = "";
