@@ -43,8 +43,6 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding: 0 0.5rem;
-  outline: 1px solid green;
-  background-color: blue;
   display: flex;
   flex-direction: column;
 }
@@ -52,17 +50,8 @@ body {
 .row {
   display: flex;
   flex-wrap: wrap;
-  background-color: purple;
-  outline: 1px solid red;
 }
-/*
-.row > * {
-  flex-shrink: 0;
-  max-width: 100%;
-  width: 100%;
 
-}
-*/
 .justify-content-center {
   justify-content: center;
 }
@@ -212,7 +201,7 @@ fieldset {
   outline: none;
   position: relative;
   overflow: hidden;
-  font-weight: normal;
+  font-weight: 400;
 
 }
 

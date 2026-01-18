@@ -147,18 +147,20 @@ function renderEntries() {
 
 
     li.innerHTML = `
-    <div class="entry__main">
-      <span class="entry__name">${index + 1}. ${entry.name} ${entry.surname}</span>
-      <span class="entry__score">${entry.score}</span>
-      <span class="entry__grade">${entry.grade}</span>
-      <button type="button" class="entry__edit" data-action="edit">Edit</button>
-      <button type="button" class="entry__delete" data-action="delete">Delete</button>
-    </div>
-    <div class="entry__meta">
-      <span>Class: ${entry.className}</span>
-      <span>Subject: ${entry.subject}</span>
-      <span>Assessment: ${entry.assessmentType}</span>
-    </div>
+    <article>
+      <div class="entry__main">
+        <span class="entry__name">${index + 1}. ${entry.name} ${entry.surname}</span>
+        <span class="entry__score">${entry.score}</span>
+        <span class="entry__grade">${entry.grade}</span>
+        <button type="button" class="entry__edit" data-action="edit">Edit</button>
+        <button type="button" class="entry__delete" data-action="delete">Delete</button>
+      </div>
+      <div class="entry__meta">
+        <span>Class: ${entry.className}</span>
+        <span>Subject: ${entry.subject}</span>
+        <span>Assessment: ${entry.assessmentType}</span>
+      </div>
+    </article>
     `;
 
     entriesList.appendChild(li);
