@@ -123,14 +123,82 @@
       <section class="records-sect">
         <div class="container-XXL">
           <div class="row justify-content-center">
-              <div class="entries">
-                <h2 class="entries__title">Entries</h2>
-                <p class="entries__empty" id="entriesEmpty">
-                  No entries yet. Add your first grade above.
-                </p>
-                <ul class="entries__list" id="entriesList">
-                </ul>
-              </div>
+            <div class="entries" id="active-filters-cnt">
+              <h4>Filtres</h4>
+            </div>
+          </div>
+          <div class="row justify-content-center records-layout">
+            <aside class="record-controls-cnt" aria-label="Filter and sort entries">
+              <form class="filters">
+                <h4>Filtr</h4>
+                <div class="filter-group" id="filter-cnt">
+                  <label for="filter-name">Name</label>
+                  <input id="filter-surname" type="text">
+                  <label for="filter-surname">Surname</label>
+                  <input id="filter-name" type="text">
+                  <label for="filter-class">Class</label>
+                  <select id="filter-class">
+                    <option value="" selected>All</option>
+                    <option value="1a">1a</option>
+                    <option value="1b">1b</option>
+                    <option value="1c">1c</option>
+                    <option value="2a">2a</option>
+                    <option value="2b">2b</option>
+                    <option value="2c">2c</option>
+                    <option value="3a">3a</option>
+                    <option value="3b">3b</option>
+                    <option value="3c">3c</option>
+                  </select>
+                  <label for="filter-subject">Subject</label>
+                  <select id="filter-subject">
+                    <option value="" selected>All</option>
+                    <option value="mathematics" >Mathematics</option>
+                    <option value="chemistry" >Chemistry</option>
+                    <option value="biology" >Biology</option>
+                    <option value="physics" >Physics</option>
+                    <option value="english" >English</option>
+                    <option value="history" >History</option>
+                    <option value="spanish" >Spanish</option>
+                    <option value="physical-education" >Physical-education</option>
+                    <option value="geography" >Geography</option>
+                  </select>
+                  <label for="filter-assessment">Assessment</label>
+                  <select id="filter-assessment">
+                    <option value="" selected>All</option>
+                    <option value="testquizzes">Test & Quizzes</option>
+                    <option value="homework">Homework</option>
+                    <option value="class_participation">Class Participation</option>
+                    <option value="project&presentation">Project & Presentation</option>
+                    <option value="essays_&_Written Work">Essays & Written Work</option>
+                    <option value="Labs & Practical Work">Labs & Practical Work</option>
+                    <option value="Final Exams / Midterms">Final Exams / Midterms</option>
+                  </select>
+                </div>
+              </form>
+              <form class="sort">
+                <h4>Sort</h4>
+                <div class="sort-group">
+                  <label for="sort-name">Sort by name</label>
+                  <select id="sort-name"> A to Z
+                  </select>
+                  <label for="sort-surname">Sort by surname</label>
+                  <select id="sort-surname">
+                  </select>
+                  <label for="sort-score">Sort by score</label>
+                  <select id="sort-score">
+                  </select>
+                  
+                </div>
+              </form>
+            </aside>
+            <div class="entries">
+              <h2 class="entries__title">Entries</h2>
+              <p class="entries__empty" id="entriesEmpty">
+                No entries yet. Add your first grade above.
+              </p>
+              <ul class="entries__list" id="entriesList">
+              </ul>
+            </div>
           </div>
         </div>
       </section>

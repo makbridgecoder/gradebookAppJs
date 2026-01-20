@@ -176,8 +176,7 @@ fieldset {
 .entries {
   border: 1px solid green;
   background-color: var(--color-gray-50);
-  margin-top: 1rem;
-  width: 100%;
+  width: 70%;
   padding: 1rem;
 
   
@@ -228,6 +227,17 @@ fieldset {
 #add-score-btn:hover {
   border-color: #666666;
   background: #292929;
+}
+
+.record-controls-cnt {
+  outline: 1px solid red;
+  background-color: #b6e965;
+  width: 30%;
+}
+
+.record-layout {
+  display: flex;
+  margin-top: 1rem;
 }
 
 /*MEDIA QUERIES*/

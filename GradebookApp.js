@@ -14,7 +14,15 @@ const scoreComment = document.getElementById("score-comment");
 const entriesCounter = document.getElementById("gradebook-counter_id"); 
 const entriesList = document.getElementById("entriesList");
 const entriesEmpty = document.getElementById("entriesEmpty");
+const activeFiltres = document.getElementById("active-filters-cnt");
+const classFilter = document.getElementById("filter-class");
+const subjectFilter = document.getElementById("filter-subject");
+const assessmentFilter = document.getElementById("filter-assessment");
 
+const classes = ["1a", "1b", "1c", "2a", "2b", "2c", "3a", "3b", "3c"];
+const subjects = ["Mathematics", "Chemistry", "Biology", "Physics", "English", "History", "Spanish", "Physical-education", "Geography"];
+const assessments = ["Test & Quizzes", "Homework", "Class Participation", "Projct & Presentation", "Essays & Written Work", "Labs & Practical Work", "Final Exams / Midterms"
+]
 
 const backgroundColorsArr = [
   "#D6A99D",
@@ -119,7 +127,10 @@ function isValidScore(score) {
 - get student data from DB or check if it is in the DB
 - use grid to adjust entrycontainer
 - refactor code using data-* attributes
-- check validation function - trim leading and trailing whitespace
+- check validation function - trim leading and trailing whitespace 
+- rebuild filter options from select to checkbox?
+- change select values to lowercase
+- add checkboxes to main list, to delete couple items
 
 
 */
@@ -238,7 +249,6 @@ function startEditing(entry) {
   
   addScoreBtn.textContent = "Update entry";
   
-
 }
 
 
@@ -277,7 +287,6 @@ function stopEditing() {
     }
     
     if (action === "edit") {
-      console.log(entries);
       const entryToEdit = entries.find(entry => entry.id === id); 
       if (!entryToEdit) return;
       
@@ -286,8 +295,6 @@ function stopEditing() {
       return;
       
     }
-    
-    
     
   })
   
@@ -328,6 +335,8 @@ function stopEditing() {
     
   });
   
+  console.log(entries);
+
  
 //function to convert score to letter grade
 function getGrade(score) {
@@ -340,6 +349,19 @@ function getGrade(score) {
     return "F";
     
 };
+
+function populateSelect(select, options) {
+  options.forEach(opt => {
+    const option = document.createElement("option");
+    option.value = opt; 
+    option.textContent = opt; 
+    select.appendChild(option)
+  });
+
+}
+
+
+
 
 
 /*
